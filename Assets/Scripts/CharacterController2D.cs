@@ -7,6 +7,8 @@ public class CharacterController2D : MonoBehaviour
 {
     public Vector2 size = new Vector2(2, 2);
     public float minMovement;
+    public float upGravity = 8;
+    public float downGravity = 20;
 
     [HideInInspector]
     public bool grounded = false;
@@ -21,7 +23,19 @@ public class CharacterController2D : MonoBehaviour
     {
         if (delta < 0) { delta = Time.fixedDeltaTime; } // Default args must be compile time constants.
 
-        if (!grounded) { velocity += Vector3.down * 3 * delta; }
+        if (grounded)
+        {
+            nonAlloc[0] = null;
+            Physics2D.OverlapBoxNonAlloc(transform.position + Vector3.Scale(Vector2.down, this.size / 2), this.size / 2, 0, nonAlloc);
+            if (nonAlloc[0] == null)
+            {
+                grounded = false;
+            }
+        }
+        if (!grounded)
+        {
+            velocity += Vector3.down * delta * (velocity.y > 0 && Input.GetButton("Fire1") ? upGravity : downGravity);
+        }
 
         if (velocity.sqrMagnitude <= minMovement * minMovement) { return; }
 
@@ -29,68 +43,74 @@ public class CharacterController2D : MonoBehaviour
 
         if (velocity.y < 0)
         {
-            collideBottom();
+            CollideBottom();
         }
-        if (velocity.x < 0)
+        if (velocity.x <= 0)
         {
-            collideLeft();
-            collideRight();
+            CollideLeft();
+            CollideRight();
         }
-        if (velocity.x > 0)
+        else
         {
-            collideRight();
-            collideLeft();
+            CollideRight();
+            CollideLeft();
         }
         if (velocity.y > 0)
         {
-            collideTop();
+            CollideTop();
         }
     }
 
-    private void collideBottom()
+    // CHEATING: ASSUMES THAT TILES ARE ONE UNITY UNIT WIDE >:))
+    private void CollideBottom()
     {
         nonAlloc[0] = null;
         Physics2D.OverlapBoxNonAlloc(transform.position + Vector3.Scale(Vector2.down, this.size / 4), this.size / 2, 0, nonAlloc);
         if (nonAlloc[0] != null)
         {
-            print(transform.position);
-            transform.position += Vector3.up * (nonAlloc[0].bounds.max.y - (transform.position.y - this.size.y / 2));
-            print(transform.position);
+            float my_bottom = transform.position.y - this.size.y / 2;
+            transform.position += Vector3.up * (Mathf.Round(my_bottom) - my_bottom);
+
+            //transform.position += Vector3.up * (nonAlloc[0].bounds.max.y - (transform.position.y - this.size.y / 2));
+            print("landed");
             grounded = true;
             velocity.y = 0;
         }
     }
 
-    private void collideLeft()
+    private void CollideLeft()
     {
         nonAlloc[0] = null;
-        Debug.Log(transform.position + Vector3.Scale(Vector2.left, this.size / 4));
         Physics2D.OverlapBoxNonAlloc(transform.position + Vector3.Scale(Vector2.left, this.size / 4), this.size / 2, 0, nonAlloc);
         if (nonAlloc[0] != null)
         {
-            transform.position += Vector3.right * (nonAlloc[0].bounds.max.x - (transform.position.x - this.size.x / 2));
+            float my_left = transform.position.x - this.size.x / 2;
+            transform.position += Vector3.right * (Mathf.Round(my_left) - my_left);
+            //transform.position += Vector3.right * (nonAlloc[0].bounds.max.x - (transform.position.x - this.size.x / 2));
             velocity.x = 0;
         }
     }
 
-    private void collideRight()
+    private void CollideRight()
     {
         nonAlloc[0] = null;
         Physics2D.OverlapBoxNonAlloc(transform.position + Vector3.Scale(Vector2.right, this.size / 4), this.size / 2, 0, nonAlloc);
         if (nonAlloc[0] != null)
         {
-            transform.position += Vector3.right * (nonAlloc[0].bounds.min.x - (transform.position.x + this.size.x / 2));
+            float my_right = transform.position.x + this.size.x / 2;
+            transform.position += Vector3.right * (Mathf.Round(my_right) - my_right);
             velocity.x = 0;
         }
     }
 
-    private void collideTop()
+    private void CollideTop()
     {
         nonAlloc[0] = null;
         Physics2D.OverlapBoxNonAlloc(transform.position + Vector3.Scale(Vector2.up, this.size / 4), this.size / 2, 0, nonAlloc);
         if (nonAlloc[0] != null)
         {
-            transform.position += Vector3.up * (nonAlloc[0].bounds.min.y - (transform.position.y + this.size.y / 2));
+            float my_top = transform.position.y + this.size.y / 2;
+            transform.position += Vector3.up * (Mathf.Round(my_top) - my_top);
             velocity.y = 0;
         }
     }

@@ -14,13 +14,19 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        //if (controller.grounded)
-        //{
+        if (controller.grounded)
+        {
             controller.velocity.x = Input.GetAxis("Horizontal") * 5;
-        //}
-        //if (Input.GetButtonDown("Fire1"))
-        //{
-            controller.Move(Time.fixedDeltaTime);
-        //}
+            if (Input.GetButtonDown("Fire1")) {
+                controller.grounded = false;
+                controller.velocity.y += 10;
+            }
+        }
+        else
+        {
+            //controller.velocity.x += Input.GetAxis("Horizontal");
+            controller.velocity.x = Mathf.MoveTowards(controller.velocity.x, Input.GetAxis("Horizontal") * 5, 1f);
+        }
+        controller.Move(Time.fixedDeltaTime);
     }
 }
