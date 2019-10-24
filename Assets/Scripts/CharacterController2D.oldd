@@ -1,0 +1,43 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CharacterController2D : MonoBehaviour
+{
+    public Vector2 size = new Vector2(2, 2);
+    public float minMovement;
+
+    [HideInInspector]
+    public bool grounded = false;
+    [HideInInspector]
+    public Vector3 velocity = Vector3.zero;
+
+    private Collider2D[] nonAlloc = new Collider2D[1];
+
+
+    // Call as many times as you want per frame, as opposed to regular Character Controller    
+    public void Move(float delta = -1)
+    {
+        if (delta < 0) { delta = Time.fixedDeltaTime; } // Default args must be compile time constants.
+
+        if (!grounded) { velocity += Vector3.down * 3 * delta; }
+
+        if (velocity.sqrMagnitude <= minMovement * minMovement) { return; }
+
+        nonAlloc[0] = null;
+        Physics2D.OverlapBoxNonAlloc(transform.position + velocity * delta, this.size, 0, nonAlloc);
+        if (nonAlloc[0] == null)
+        {
+            transform.position += velocity * delta;
+        }
+        else
+        {
+            print("ouch");
+            RaycastHit2D hit = Physics2D.BoxCast(transform.position, this.size, 0, velocity);
+            if (Vector2.Angle(hit.normal, Vector2.up) < 45) { grounded = true; }
+            transform.position += hit.distance * velocity.normalized;
+            velocity = Vector2.Dot(velocity, Vector2.Perpendicular(hit.normal)) * Vector2.Perpendicular(hit.normal);
+        }
+    }
+}
