@@ -8,15 +8,25 @@ public class CharacterController2D : MonoBehaviour
     public Vector2 size = new Vector2(2, 2);
     public float minMovement;
     public float upGravity = 8;
-    public float downGravity = 20;
+    public float downGravity = 32;
 
     [HideInInspector]
     public bool grounded = false;
     [HideInInspector]
+    public bool applyLowGrav = false;
+    [HideInInspector]
+    public bool ignoringOneWayPlatforms = false;
+    [HideInInspector]
     public Vector3 velocity = Vector3.zero;
 
+    private int nonOneWayPlatforms;
     private Collider2D[] nonAlloc = new Collider2D[1];
 
+    public void Start()
+    {
+        nonOneWayPlatforms = Physics2D.AllLayers ^ 1 << LayerMask.NameToLayer("OneWayPlatform");
+        print(nonOneWayPlatforms);
+    }
 
     // Call as many times as you want per frame, as opposed to regular Character Controller    
     public void Move(float delta = -1)
@@ -34,7 +44,7 @@ public class CharacterController2D : MonoBehaviour
         }
         if (!grounded)
         {
-            velocity += Vector3.down * delta * (velocity.y > 0 && Input.GetButton("Fire1") ? upGravity : downGravity);
+            velocity += Vector3.down * delta * (velocity.y > 0 && applyLowGrav ? upGravity : downGravity);
         }
 
         if (velocity.sqrMagnitude <= minMovement * minMovement) { return; }
@@ -64,8 +74,10 @@ public class CharacterController2D : MonoBehaviour
     // CHEATING: ASSUMES THAT TILES ARE ONE UNITY UNIT WIDE >:))
     private void CollideBottom()
     {
+        int layerMask = this.ignoringOneWayPlatforms ? nonOneWayPlatforms : Physics2D.AllLayers;
+
         nonAlloc[0] = null;
-        Physics2D.OverlapBoxNonAlloc(transform.position + Vector3.Scale(Vector2.down, this.size / 4), this.size / 2, 0, nonAlloc);
+        Physics2D.OverlapBoxNonAlloc(transform.position + Vector3.Scale(Vector2.down, this.size / 4), this.size / 2, 0, nonAlloc, layerMask);
         if (nonAlloc[0] != null)
         {
             float my_bottom = transform.position.y - this.size.y / 2;
@@ -81,7 +93,7 @@ public class CharacterController2D : MonoBehaviour
     private void CollideLeft()
     {
         nonAlloc[0] = null;
-        Physics2D.OverlapBoxNonAlloc(transform.position + Vector3.Scale(Vector2.left, this.size / 4), this.size / 2, 0, nonAlloc);
+        Physics2D.OverlapBoxNonAlloc(transform.position + Vector3.Scale(Vector2.left, this.size / 4), this.size / 2, 0, nonAlloc, nonOneWayPlatforms);
         if (nonAlloc[0] != null)
         {
             float my_left = transform.position.x - this.size.x / 2;
@@ -94,7 +106,7 @@ public class CharacterController2D : MonoBehaviour
     private void CollideRight()
     {
         nonAlloc[0] = null;
-        Physics2D.OverlapBoxNonAlloc(transform.position + Vector3.Scale(Vector2.right, this.size / 4), this.size / 2, 0, nonAlloc);
+        Physics2D.OverlapBoxNonAlloc(transform.position + Vector3.Scale(Vector2.right, this.size / 4), this.size / 2, 0, nonAlloc, nonOneWayPlatforms);
         if (nonAlloc[0] != null)
         {
             float my_right = transform.position.x + this.size.x / 2;
@@ -106,7 +118,7 @@ public class CharacterController2D : MonoBehaviour
     private void CollideTop()
     {
         nonAlloc[0] = null;
-        Physics2D.OverlapBoxNonAlloc(transform.position + Vector3.Scale(Vector2.up, this.size / 4), this.size / 2, 0, nonAlloc);
+        Physics2D.OverlapBoxNonAlloc(transform.position + Vector3.Scale(Vector2.up, this.size / 4), this.size / 2, 0, nonAlloc, nonOneWayPlatforms);
         if (nonAlloc[0] != null)
         {
             float my_top = transform.position.y + this.size.y / 2;
