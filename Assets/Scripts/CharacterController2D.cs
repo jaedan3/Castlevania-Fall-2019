@@ -19,13 +19,16 @@ public class CharacterController2D : MonoBehaviour
     [HideInInspector]
     public Vector3 velocity = Vector3.zero;
 
-    private int nonOneWayPlatforms;
+    private bool notInOneWayPlatform = false;
+
+    private int oneWayMask;
+    private int notOneWayMask;
     private Collider2D[] nonAlloc = new Collider2D[1];
 
     public void Start()
     {
-        nonOneWayPlatforms = Physics2D.AllLayers ^ 1 << LayerMask.NameToLayer("OneWayPlatform");
-        print(nonOneWayPlatforms);
+        oneWayMask = 1 << LayerMask.NameToLayer("OneWayPlatform");
+        notOneWayMask = Physics2D.AllLayers ^ oneWayMask;
     }
 
     // Call as many times as you want per frame, as opposed to regular Character Controller    
@@ -49,82 +52,142 @@ public class CharacterController2D : MonoBehaviour
 
         if (velocity.sqrMagnitude <= minMovement * minMovement) { return; }
 
-        transform.position += velocity * delta;
+        transform.position += velocity * delta; // Collide Point assumes point has moved before displacement.
 
         if (velocity.y < 0)
         {
-            CollideBottom();
+            CollideBottom(-velocity * delta);
         }
-        if (velocity.x <= 0)
+        if (velocity.x < 0)
         {
-            CollideLeft();
-            CollideRight();
+            CollideLeft(-velocity * delta);
+            CollideRight(-velocity * delta * 0.5f); // Fudging the numbers
+        }
+        else if (velocity.x > 0)
+        {
+            CollideRight(-velocity * delta);
+            CollideLeft(-velocity * delta * 0.5f); // Again
         }
         else
         {
-            CollideRight();
-            CollideLeft();
+            CollideRight(-velocity * delta * 0.5f);
+            CollideLeft(-velocity * delta * 0.5f); // Again
         }
         if (velocity.y > 0)
         {
-            CollideTop();
+            CollideTop(-velocity * delta);
+        }
+
+        if (this.ignoringOneWayPlatforms)
+        {
+            nonAlloc[0] = null;
+            Physics2D.OverlapBoxNonAlloc(transform.position + Vector3.Scale(Vector2.down, this.size / 4), this.size / 2, 0, nonAlloc, oneWayMask);
+            if (nonAlloc[0] == null)
+            {
+                this.ignoringOneWayPlatforms = false;
+            }
+        }
+        else
+        {
+            nonAlloc[0] = null;
+            Physics2D.OverlapBoxNonAlloc(transform.position + Vector3.Scale(Vector2.down, this.size / 4), this.size / 2, 0, nonAlloc, oneWayMask);
+            if (nonAlloc[0] != null)
+            {
+                this.ignoringOneWayPlatforms = true;
+            }
         }
     }
 
-    // CHEATING: ASSUMES THAT TILES ARE ONE UNITY UNIT WIDE >:))
-    private void CollideBottom()
+    private void CollideBottom(Vector2 displacement)
     {
-        int layerMask = this.ignoringOneWayPlatforms ? nonOneWayPlatforms : Physics2D.AllLayers;
+        //if (!crossesInteger(transform.position.y, transform.position.y + displacement.y)) { return; }
+
+        for (float i = -size.x/4f; i < size.x/4f; i += 0.1f)
+        {
+            CollidePoint((this.ignoringOneWayPlatforms ? notOneWayMask : Physics2D.AllLayers),
+                new Vector2(i, -size.y / 2), displacement, ResolveBottom);
+        }
+    }
+
+    private void CollideLeft(Vector2 displacement)
+    {
+        //if (!crossesInteger(transform.position.x, transform.position.x + displacement.x)) { return; }
+
+        for (float i = -size.y/4f; i < size.y/4f; i += 0.1f)
+        {
+            CollidePoint(notOneWayMask, new Vector2(-size.x / 2, i), displacement, ResolveRight);
+        }
+    }
+
+    private void CollideRight(Vector2 displacement)
+    {
+        //if (!crossesInteger(transform.position.x, transform.position.x + displacement.x)) { return; }
+
+        for (float i = -size.y/4f; i < size.y/4f; i += 0.1f)
+        {
+            CollidePoint(notOneWayMask, new Vector2(size.x / 2, i), displacement, ResolveRight);
+        }
+    }
+
+    private void CollideTop(Vector2 displacement)
+    {
+        //if (!crossesInteger(transform.position.y, transform.position.y + displacement.y)) { return; }
+
+        for (float i = -size.y/4f; i < size.y/4f; i += 0.1f)
+        {
+            CollidePoint(notOneWayMask, new Vector2(i, size.y / 2), displacement, ResolveBottom);
+        }
+    }
+
+    private void CollidePoint(int layerMask, Vector2 offset, Vector2 displacement, Action<Vector2> resolution)
+    {
+        Vector2 position = new Vector2(transform.position.x, transform.position.y);
 
         nonAlloc[0] = null;
-        Physics2D.OverlapBoxNonAlloc(transform.position + Vector3.Scale(Vector2.down, this.size / 4), this.size / 2, 0, nonAlloc, layerMask);
+        Physics2D.OverlapAreaNonAlloc(position + offset, position + offset + displacement, nonAlloc, layerMask);
         if (nonAlloc[0] != null)
         {
-            float my_bottom = transform.position.y - this.size.y / 2;
-            transform.position += Vector3.up * (Mathf.Round(my_bottom) - my_bottom);
-
-            //transform.position += Vector3.up * (nonAlloc[0].bounds.max.y - (transform.position.y - this.size.y / 2));
-            print("landed");
-            grounded = true;
-            velocity.y = 0;
+            resolution(displacement);
         }
     }
 
-    private void CollideLeft()
+    //// CHEATING: ASSUMES THAT TILES ARE ONE UNITY UNIT WIDE >:))
+    private void ResolveBottom(Vector2 displacement)
     {
-        nonAlloc[0] = null;
-        Physics2D.OverlapBoxNonAlloc(transform.position + Vector3.Scale(Vector2.left, this.size / 4), this.size / 2, 0, nonAlloc, nonOneWayPlatforms);
-        if (nonAlloc[0] != null)
-        {
-            float my_left = transform.position.x - this.size.x / 2;
-            transform.position += Vector3.right * (Mathf.Round(my_left) - my_left);
-            //transform.position += Vector3.right * (nonAlloc[0].bounds.max.x - (transform.position.x - this.size.x / 2));
-            velocity.x = 0;
-        }
+        float my_bottom = transform.position.y - this.size.y / 2;
+        transform.position += Vector3.up * (Mathf.Round(my_bottom) - my_bottom);
+
+        //transform.position += Vector3.up * (nonAlloc[0].bounds.max.y - (transform.position.y - this.size.y / 2));
+        print("landed");
+        grounded = true;
+        velocity.y = 0;
     }
 
-    private void CollideRight()
+
+    private void ResolveLeft(Vector2 displacement)
     {
-        nonAlloc[0] = null;
-        Physics2D.OverlapBoxNonAlloc(transform.position + Vector3.Scale(Vector2.right, this.size / 4), this.size / 2, 0, nonAlloc, nonOneWayPlatforms);
-        if (nonAlloc[0] != null)
-        {
-            float my_right = transform.position.x + this.size.x / 2;
-            transform.position += Vector3.right * (Mathf.Round(my_right) - my_right);
-            velocity.x = 0;
-        }
+        float my_left = transform.position.x - this.size.x / 2;
+        transform.position += Vector3.right * (Mathf.Round(my_left) - my_left);
+        //transform.position += Vector3.right * (nonAlloc[0].bounds.max.x - (transform.position.x - this.size.x / 2));
+        velocity.x = 0;
     }
 
-    private void CollideTop()
+    private void ResolveRight(Vector2 displacement)
     {
-        nonAlloc[0] = null;
-        Physics2D.OverlapBoxNonAlloc(transform.position + Vector3.Scale(Vector2.up, this.size / 4), this.size / 2, 0, nonAlloc, nonOneWayPlatforms);
-        if (nonAlloc[0] != null)
-        {
-            float my_top = transform.position.y + this.size.y / 2;
-            transform.position += Vector3.up * (Mathf.Round(my_top) - my_top);
-            velocity.y = 0;
-        }
+        float my_right = transform.position.x + this.size.x / 2;
+        transform.position += Vector3.right * (Mathf.Round(my_right) - my_right);
+        velocity.x = 0;
     }
 
+    private void ResolveTop(Vector2 displacement)
+    {
+        float my_top = transform.position.y + this.size.y / 2;
+        transform.position += Vector3.up * (Mathf.Round(my_top) - my_top);
+        velocity.y = 0;
+    }
+
+    //private bool crossesInteger(float a, float b)
+    //{
+    //    return (a - b) == ((a % 1) - (b % 1)); // Check if a and b are on the same tooth of a saw wave
+    //}
 }
