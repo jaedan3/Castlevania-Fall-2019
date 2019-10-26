@@ -115,7 +115,7 @@ public class CharacterController2D : MonoBehaviour
 
         for (float i = -size.y/4f; i < size.y/4f; i += 0.1f)
         {
-            CollidePoint(notOneWayMask, new Vector2(-size.x / 2, i), displacement, ResolveRight);
+            CollidePoint(notOneWayMask, new Vector2(-size.x / 2, i), displacement, ResolveLeft);
         }
     }
 
@@ -133,9 +133,9 @@ public class CharacterController2D : MonoBehaviour
     {
         //if (!crossesInteger(transform.position.y, transform.position.y + displacement.y)) { return; }
 
-        for (float i = -size.y/4f; i < size.y/4f; i += 0.1f)
+        for (float i = -size.x/4f; i < size.x/4f; i += 0.1f)
         {
-            CollidePoint(notOneWayMask, new Vector2(i, size.y / 2), displacement, ResolveBottom);
+            CollidePoint(notOneWayMask, new Vector2(i, size.y / 2), displacement, ResolveTop);
         }
     }
 
