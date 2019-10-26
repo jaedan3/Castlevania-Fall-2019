@@ -4,8 +4,23 @@ using UnityEngine;
 
 abstract public class Enemy : MonoBehaviour
 {
-    public abstract void movement();
-    public abstract void tracking();
-    public abstract void attack();
-    public abstract void damaged();
+
+    public Attack attackModule;
+    public int currentHealth;
+    public float speed;
+    public GameObject target;
+    protected int maxHealth;
+    
+
+    protected abstract void movement();
+    protected abstract void damaged();
+
+    public Vector3 tracking(GameObject target)
+    {
+        return target.GetComponent<Transform>().position;
+    }
+    public Rigidbody2D get_rigid_body_2d(GameObject target)
+    {
+        return target.GetComponent<Rigidbody2D>();
+    }
 }
