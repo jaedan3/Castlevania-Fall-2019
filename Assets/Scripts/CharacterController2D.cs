@@ -158,7 +158,7 @@ public class CharacterController2D : MonoBehaviour
         transform.position += Vector3.up * (Mathf.Round(my_bottom) - my_bottom);
 
         //transform.position += Vector3.up * (nonAlloc[0].bounds.max.y - (transform.position.y - this.size.y / 2));
-        print("landed");
+        //print("landed");
         grounded = true;
         velocity.y = 0;
     }

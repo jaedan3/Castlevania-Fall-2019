@@ -5,11 +5,16 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController2D))]
 public class PlayerMovement : MonoBehaviour
 {
+    SpriteRenderer spriteRenderer;
     CharacterController2D controller;
+    Animator animator;
+    private bool lastUpdateGrounded;
 
     void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         controller = GetComponent<CharacterController2D>();
+        animator = GetComponent<Animator>();
     }
 
     void FixedUpdate()
@@ -25,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     controller.ignoringOneWayPlatforms = true;
                     controller.grounded = false;
+                    animator.SetTrigger("FallThrough");
                 }
                 else
                 {
@@ -40,5 +46,26 @@ public class PlayerMovement : MonoBehaviour
             controller.velocity.x = Mathf.MoveTowards(controller.velocity.x, Input.GetAxis("Horizontal") * 5, 1f);
         }
         controller.Move(Time.fixedDeltaTime);
+        if (controller.grounded != lastUpdateGrounded)
+        {
+            if (controller.grounded)
+            {
+                animator.SetTrigger("JustLanded");
+            }
+            else
+            {
+                animator.SetTrigger("JustAirborn");
+            }
+            lastUpdateGrounded = controller.grounded;
+        }
+        if (controller.velocity.x < 0)
+        {
+            spriteRenderer.flipX = true;
+        }
+        else if (controller.velocity.x > 0)
+        {
+            spriteRenderer.flipX = false;
+        }
+        animator.SetFloat("XSpeed", Mathf.Abs(controller.velocity.x));
     }
 }
