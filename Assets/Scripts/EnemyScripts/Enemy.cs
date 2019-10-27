@@ -8,12 +8,19 @@ abstract public class Enemy : MonoBehaviour
     public Attack attackModule;
     public int currentHealth;
     public float speed;
+    public float pushBack;
     public GameObject target;
     protected int maxHealth;
+    protected Rigidbody2D rb2d;
+    protected bool stunned;
     
-
     protected abstract void movement();
     protected abstract void damaged();
+
+    void Start()
+    {
+        rb2d = GetComponent<Rigidbody2D>();
+    }
 
     public Vector3 tracking(GameObject target)
     {
