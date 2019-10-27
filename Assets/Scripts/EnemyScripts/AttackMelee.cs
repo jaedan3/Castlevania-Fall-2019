@@ -40,7 +40,7 @@ public class AttackMelee : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-         if (collision.collider.tag == "Attack") // When collided with an attack
+        if (collision.collider.tag == "Attack") // When collided with an attack
         {
             if ((HP -= 20) > 0) // if HP is greator than 0, call KB(knockback)
             {
@@ -48,7 +48,17 @@ public class AttackMelee : MonoBehaviour
                 knocked = true;
                 animator.SetBool("Air", true);
             }
-            else    animator.SetTrigger("death");
+            else                //########################## DYING
+            {
+                if (true)
+                {
+                    Random.InitState(System.DateTime.Now.Second);   //######    Random Seed with current time in seconds
+                    animator.SetTrigger(Random.Range(0, 1.0f) >= 0.5f ? "death" : "death2");    // 50 50 chance to play either animation
+                }
+                xComp = 0;
+                Destroy(gameObject, 1.5f);
+                
+            }
         }
     }
 
