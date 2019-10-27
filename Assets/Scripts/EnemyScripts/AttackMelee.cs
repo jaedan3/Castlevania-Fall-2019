@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMelee : MonoBehaviour
+public class AttackMelee : MonoBehaviour
 {
     public int HP = 100;
     Rigidbody2D rg;

@@ -4,8 +4,30 @@ using UnityEngine;
 
 abstract public class Enemy : MonoBehaviour
 {
-    public abstract void movement();
-    public abstract void tracking();
-    public abstract void attack();
-    public abstract void damaged();
+
+    public Attack attackModule;
+    public int currentHealth;
+    public float speed;
+    public float pushBack;
+    public GameObject target;
+    protected int maxHealth;
+    protected Rigidbody2D rb2d;
+    protected bool stunned;
+    
+    protected abstract void movement();
+    protected abstract void damaged();
+
+    void Start()
+    {
+        rb2d = GetComponent<Rigidbody2D>();
+    }
+
+    public Vector3 tracking(GameObject target)
+    {
+        return target.GetComponent<Transform>().position;
+    }
+    public Rigidbody2D get_rigid_body_2d(GameObject target)
+    {
+        return target.GetComponent<Rigidbody2D>();
+    }
 }

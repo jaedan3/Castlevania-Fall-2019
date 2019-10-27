@@ -67,5 +67,7 @@ public class PlayerMovement : MonoBehaviour
             spriteRenderer.flipX = false;
         }
         animator.SetFloat("XSpeed", Mathf.Abs(controller.velocity.x));
+        animator.SetFloat("YSpeed", Mathf.Abs(controller.velocity.y));
+        animator.SetFloat("YVel", controller.velocity.y);
     }
 }
