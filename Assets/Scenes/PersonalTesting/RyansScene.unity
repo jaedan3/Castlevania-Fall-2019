@@ -2163,6 +2163,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5292136418940566729, guid: 1ab88a9970599b6468d4ab1f5cd3715b,
+        type: 3}
+      propertyPath: m_BodyType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4834833183261194852, guid: 1ab88a9970599b6468d4ab1f5cd3715b,
         type: 3}
       propertyPath: m_RootOrder
@@ -2203,21 +2208,10 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6405923504815523713, guid: 1ab88a9970599b6468d4ab1f5cd3715b,
+    - target: {fileID: 7374933050634677396, guid: 1ab88a9970599b6468d4ab1f5cd3715b,
         type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 1951827798799853723, guid: 81fd9f93b08e9cc458e7d61138d05a9c,
-        type: 3}
-    - target: {fileID: 6405923504815523713, guid: 1ab88a9970599b6468d4ab1f5cd3715b,
-        type: 3}
-      propertyPath: m_FlipX
+      propertyPath: m_Enabled
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5950164886641880911, guid: 1ab88a9970599b6468d4ab1f5cd3715b,
-        type: 3}
-      propertyPath: size.x
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 675635566131245498, guid: 1ab88a9970599b6468d4ab1f5cd3715b,
         type: 3}
@@ -2229,15 +2223,5 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: bd90b97823b6beb4c9af9d483207560c, type: 2}
-    - target: {fileID: 5292136418940566729, guid: 1ab88a9970599b6468d4ab1f5cd3715b,
-        type: 3}
-      propertyPath: m_BodyType
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7374933050634677396, guid: 1ab88a9970599b6468d4ab1f5cd3715b,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ab88a9970599b6468d4ab1f5cd3715b, type: 3}
