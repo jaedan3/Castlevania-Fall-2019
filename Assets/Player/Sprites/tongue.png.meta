@@ -1,19 +1,16 @@
 fileFormatVersion: 2
-guid: 9d1e797a38266ce4a9a4f1223c75c843
+guid: affe2e8e873a87d44acc2ead5063a078
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3766400411526403140
-    second: AntWalk_0
+      213: -6667170261817661172
+    second: tongue_0
   - first:
-      213: -8698942131024181526
-    second: AntWalk_1
+      213: -3998447785731158597
+    second: tongue_1
   - first:
-      213: 4945672267012096640
-    second: AntWalk_2
-  - first:
-      213: -6025960215556854132
-    second: AntWalk_3
+      213: -742764432523467643
+    second: tongue_2
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -75,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -87,7 +84,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -98,7 +95,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: AntWalk_0
+      name: tongue_0
       rect:
         serializedVersion: 2
         x: 0
@@ -112,14 +109,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 691eaad7d2bccc24e8209e400513bd70
-      internalID: 3766400411526403140
+      spriteID: 87afeb17f4aca6c4ca00cfb930a9616f
+      internalID: -6667170261817661172
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AntWalk_1
+      name: tongue_1
       rect:
         serializedVersion: 2
         x: 32
@@ -133,14 +130,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4fcaa49123a1a154a926c4ff3ee1399a
-      internalID: -8698942131024181526
+      spriteID: a9fc4157df74fcd47820ed0a12089d2b
+      internalID: -3998447785731158597
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AntWalk_2
+      name: tongue_2
       rect:
         serializedVersion: 2
         x: 64
@@ -154,29 +151,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 902b1b97f920c6a4bbbf18912a35ccb7
-      internalID: 4945672267012096640
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: AntWalk_3
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7e973a81da97d4146b1fec89b9043243
-      internalID: -6025960215556854132
+      spriteID: dfdc3a65867ad1c418d7cc8a56cba91a
+      internalID: -742764432523467643
       vertices: []
       indices: 
       edges: []
