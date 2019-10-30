@@ -10,12 +10,11 @@ abstract public class Enemy : MonoBehaviour
     public float speed;
     public float pushBack;
     public GameObject target;
-    protected int maxHealth;
+    protected int HP;
     protected Rigidbody2D rb2d;
     protected bool stunned;
     
     protected abstract void movement();
-    protected abstract void damaged();
 
     void Start()
     {
@@ -29,5 +28,10 @@ abstract public class Enemy : MonoBehaviour
     public Rigidbody2D get_rigid_body_2d(GameObject target)
     {
         return target.GetComponent<Rigidbody2D>();
+    }
+
+    protected int damage(int power)
+    {
+        return HP-=power;
     }
 }
