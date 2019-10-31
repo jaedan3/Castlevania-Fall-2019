@@ -66,12 +66,12 @@ public class EnemyGround : Enemy
     // Update is called once per frame
     void Update()
     {
-        RaycastHit2D HitWall = Physics2D.Raycast(new Vector2(transform.position.x + (Mathf.Sign(xComp)* 1f),transform.position.y),Vector2.down, 0.1f);
+        RaycastHit2D HitWall = Physics2D.Linecast(transform.position, new Vector2(transform.position.x + Mathf.Sign(xComp) , transform.position.y-0.5f));
         if(HitWall.collider == true)
         {
             xComp = -xComp;
             render.flipX = !render.flipX;
-            transform.position = new Vector3(xComp > 0 ? transform.position.x + 0.75f : transform.position.x - 0.75f, transform.position.y, transform.position.z);
+            Debug.Log(xComp);
         }
         if (!knocked)
         {
@@ -83,7 +83,7 @@ public class EnemyGround : Enemy
             animator.SetBool("Air", false);
             render.flipX = xComp > 0 ? true : false;
         }
-    
+        
     }
     
     

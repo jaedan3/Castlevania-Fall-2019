@@ -18,5 +18,6 @@ public class SpiritScript : MonoBehaviour
     {
         transform.Translate(Vector3.up * Time.deltaTime);
         alp.color = new Color(1f, 1f, 1f, alp.color.a - 0.015f);
+        Destroy(gameObject, 3);
     }
 }
