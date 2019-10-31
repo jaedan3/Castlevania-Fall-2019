@@ -4,22 +4,19 @@ using UnityEngine;
 
 public class SpiritScript : MonoBehaviour
 {
-    Color alp;
+    SpriteRenderer alp;
     // Start is called before the first frame update
     void Start()
     {
 
-        alp = GetComponent<SpriteRenderer>().color;
-        alp.a = 255;
-        
+        alp = GetComponent<SpriteRenderer>();
+        alp.color = new Color(1 , 1, 1, 1);
     }
 
     // Update is called once per frame
     void Update()
     {
         transform.Translate(Vector3.up * Time.deltaTime);
-
-        alp.a -= 5;
-       // GetComponent<SpriteRenderer>().color = alp;
+        alp.color = new Color(1f, 1f, 1f, alp.color.a - 0.015f);
     }
 }
