@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     controller.ignoringOneWayPlatforms = true;
                     controller.grounded = false;
-                    animator.SetTrigger("FallThrough");
+                    //animator.SetTrigger("FallThrough");
                 }
                 else
                 {
