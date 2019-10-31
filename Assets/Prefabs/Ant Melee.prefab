@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 2186163281278146834}
   - component: {fileID: 2186163281278146832}
   - component: {fileID: 2845297236889211645}
-  - component: {fileID: 2845297236889211633}
   - component: {fileID: 2186163281278146844}
+  - component: {fileID: 868808990810201713}
   m_Layer: 2
-  m_Name: Ant Melee 1
+  m_Name: Ant Melee
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -123,21 +123,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.4}
   m_Size: {x: 1.4, y: 1.2}
   m_Direction: 1
---- !u!114 &2845297236889211633
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2186163281278146839}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a38b90b1652c2a47b48fb12f9b41afd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HP: 100
-  wallDetect: {fileID: 2845297236675027153}
-  xComp: 3
 --- !u!95 &2186163281278146844
 Animator:
   serializedVersion: 3
@@ -157,6 +142,23 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &868808990810201713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2186163281278146839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a08fb98d131af9148b59b9d94c2b98f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 100
+  speed: 0
+  pushBack: 0
+  target: {fileID: 0}
+  xComp: 3
 --- !u!1 &2845297236675027152
 GameObject:
   m_ObjectHideFlags: 0
