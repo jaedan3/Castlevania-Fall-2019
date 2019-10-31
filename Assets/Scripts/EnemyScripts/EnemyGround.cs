@@ -66,6 +66,7 @@ public class EnemyGround : Enemy
     // Update is called once per frame
     void Update()
     {
+        wallDetect.position = new Vector3(0f,0f,0f);
         RaycastHit2D HitWall = Physics2D.Raycast(wallDetect.position,Vector2.down, 0.01f);
         if(HitWall.collider == true)
         {   
