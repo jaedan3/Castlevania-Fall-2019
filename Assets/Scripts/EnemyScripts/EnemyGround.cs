@@ -7,7 +7,7 @@ public class EnemyGround : Enemy
     // Rigidbody2D rg;
     Animator animator;
     SpriteRenderer render;
-    private Transform wallDetect;
+    // private Transform wallDetect;
     public float xComp = 3;
     bool knocked = false;
     void Start()
@@ -23,7 +23,7 @@ public class EnemyGround : Enemy
 
         render.flipX = xComp > 0 ? true : false; //Sets the right direction
         //below will set the position of the raycaster according to the direction the ant is headed
-        // wallDetect.position = new Vector3(xComp > 0 ? transform.position.x + 0.75f : transform.position.x - 0.75f, wallDetect.position.y, wallDetect.position.z);
+        // transform.position = new Vector3(xComp > 0 ? transform.position.x + 0.75f : transform.position.x - 0.75f, transform.position.y, transform.position.z);
     }
 
     void KB(float dir)// Knock back
@@ -66,12 +66,12 @@ public class EnemyGround : Enemy
     // Update is called once per frame
     void Update()
     {
-        RaycastHit2D HitWall = Physics2D.Raycast(wallDetect.position,Vector2.down, 0.01f);
+        RaycastHit2D HitWall = Physics2D.Raycast(transform.position,Vector2.down, 0.01f);
         if(HitWall.collider == true)
         {   
             xComp = -xComp;
             render.flipX = !render.flipX;
-            wallDetect.position = new Vector3(xComp > 0 ? transform.position.x + 0.75f : transform.position.x - 0.75f, wallDetect.position.y, wallDetect.position.z);
+            transform.position = new Vector3(xComp > 0 ? transform.position.x + 0.75f : transform.position.x - 0.75f, transform.position.y, transform.position.z);
         }
         if (!knocked)
         {

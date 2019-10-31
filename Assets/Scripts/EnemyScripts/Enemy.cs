@@ -5,7 +5,7 @@ using UnityEngine;
 abstract public class Enemy : MonoBehaviour
 {
 
-    public Attack attackModule;
+    // public Attack attackModule;
     public int currentHealth;
     public float speed;
     public float pushBack;
