@@ -25,6 +25,8 @@ public class CharacterController2D : MonoBehaviour
     private int notOneWayMask;
     private Collider2D[] nonAlloc = new Collider2D[1];
 
+
+
     public void Start()
     {
         oneWayMask = 1 << LayerMask.NameToLayer("OneWayPlatform");
@@ -155,7 +157,7 @@ public class CharacterController2D : MonoBehaviour
     private void ResolveBottom(Vector2 displacement)
     {
         float my_bottom = transform.position.y - this.size.y / 2;
-        transform.position += Vector3.up * (Mathf.Round(my_bottom) - my_bottom);
+        transform.position += Vector3.up * (Mathf.Round(my_bottom) - my_bottom + Physics2D.defaultContactOffset);
 
         //transform.position += Vector3.up * (nonAlloc[0].bounds.max.y - (transform.position.y - this.size.y / 2));
         //print("landed");
@@ -167,7 +169,7 @@ public class CharacterController2D : MonoBehaviour
     private void ResolveLeft(Vector2 displacement)
     {
         float my_left = transform.position.x - this.size.x / 2;
-        transform.position += Vector3.right * (Mathf.Round(my_left) - my_left);
+        transform.position += Vector3.right * (Mathf.Round(my_left) - my_left + Physics2D.defaultContactOffset);
         //transform.position += Vector3.right * (nonAlloc[0].bounds.max.x - (transform.position.x - this.size.x / 2));
         velocity.x = 0;
     }
@@ -175,14 +177,14 @@ public class CharacterController2D : MonoBehaviour
     private void ResolveRight(Vector2 displacement)
     {
         float my_right = transform.position.x + this.size.x / 2;
-        transform.position += Vector3.right * (Mathf.Round(my_right) - my_right);
+        transform.position += Vector3.right * (Mathf.Round(my_right) - my_right - Physics2D.defaultContactOffset);
         velocity.x = 0;
     }
 
     private void ResolveTop(Vector2 displacement)
     {
         float my_top = transform.position.y + this.size.y / 2;
-        transform.position += Vector3.up * (Mathf.Round(my_top) - my_top);
+        transform.position += Vector3.up * (Mathf.Round(my_top) - my_top - Physics2D.defaultContactOffset);
         velocity.y = 0;
     }
 
