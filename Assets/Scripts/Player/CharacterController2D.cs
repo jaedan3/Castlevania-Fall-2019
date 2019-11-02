@@ -21,6 +21,7 @@ public class CharacterController2D : MonoBehaviour
 
     private bool notInOneWayPlatform = false;
 
+    private int notIgnoreRaycast;
     private int oneWayMask;
     private int notOneWayMask;
     private Collider2D[] nonAlloc = new Collider2D[1];
@@ -29,8 +30,9 @@ public class CharacterController2D : MonoBehaviour
 
     public void Start()
     {
-        oneWayMask = 1 << LayerMask.NameToLayer("OneWayPlatform");
-        notOneWayMask = Physics2D.AllLayers ^ oneWayMask;
+        notIgnoreRaycast = Physics2D.AllLayers ^ (1 << LayerMask.NameToLayer("Ignore Raycast"));
+        oneWayMask = (1 << LayerMask.NameToLayer("OneWayPlatform"));
+        notOneWayMask = (Physics2D.AllLayers ^ oneWayMask) & notIgnoreRaycast;
     }
 
     // Call as many times as you want per frame, as opposed to regular Character Controller    
@@ -106,7 +108,7 @@ public class CharacterController2D : MonoBehaviour
 
         for (float i = -size.x/4f; i < size.x/4f; i += 0.1f)
         {
-            CollidePoint((this.ignoringOneWayPlatforms ? notOneWayMask : Physics2D.AllLayers),
+            CollidePoint((this.ignoringOneWayPlatforms ? notOneWayMask : notIgnoreRaycast),
                 new Vector2(i, -size.y / 2), displacement, ResolveBottom);
         }
     }
@@ -117,7 +119,7 @@ public class CharacterController2D : MonoBehaviour
 
         for (float i = -size.y/4f; i < size.y/4f; i += 0.1f)
         {
-            CollidePoint(notOneWayMask, new Vector2(-size.x / 2, i), displacement, ResolveLeft);
+            CollidePoint(notOneWayMask, new Vector2(-size.x / 2 , i), displacement, ResolveLeft);
         }
     }
 
