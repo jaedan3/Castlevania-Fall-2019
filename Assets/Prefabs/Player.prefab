@@ -96,6 +96,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd5a40ef3c2781a4c9cabc56666d8bf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  xAxis: Horizontal
+  yAxis: Vertical
+  bounds: 0.5
 --- !u!1 &7662536312996070386
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,6 +200,7 @@ MonoBehaviour:
   minMovement: 0
   upGravity: 8
   downGravity: 32
+  maxFallSpeed: 60
   grounded: 0
   applyLowGrav: 0
   ignoringOneWayPlatforms: 0

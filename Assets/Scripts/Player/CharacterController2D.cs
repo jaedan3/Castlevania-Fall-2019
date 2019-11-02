@@ -9,6 +9,7 @@ public class CharacterController2D : MonoBehaviour
     public float minMovement;
     public float upGravity = 8;
     public float downGravity = 32;
+    public float maxFallSpeed = 60;
 
     [HideInInspector]
     public bool grounded = false;
@@ -52,6 +53,7 @@ public class CharacterController2D : MonoBehaviour
         if (!grounded)
         {
             velocity += Vector3.down * delta * (velocity.y > 0 && applyLowGrav ? upGravity : downGravity);
+            if (velocity.y < -maxFallSpeed) { velocity += Vector3.up * (velocity.y - maxFallSpeed); }
         }
 
         if (velocity.sqrMagnitude <= minMovement * minMovement) { return; }
@@ -159,7 +161,7 @@ public class CharacterController2D : MonoBehaviour
     private void ResolveBottom(Vector2 displacement)
     {
         float my_bottom = transform.position.y - this.size.y / 2;
-        transform.position += Vector3.up * (Mathf.Round(my_bottom) - my_bottom + Physics2D.defaultContactOffset);
+        transform.position += Vector3.up * (Mathf.Round(my_bottom) - my_bottom + Physics2D.defaultContactOffset * 2);
 
         //transform.position += Vector3.up * (nonAlloc[0].bounds.max.y - (transform.position.y - this.size.y / 2));
         //print("landed");
@@ -171,7 +173,7 @@ public class CharacterController2D : MonoBehaviour
     private void ResolveLeft(Vector2 displacement)
     {
         float my_left = transform.position.x - this.size.x / 2;
-        transform.position += Vector3.right * (Mathf.Round(my_left) - my_left + Physics2D.defaultContactOffset);
+        transform.position += Vector3.right * (Mathf.Round(my_left) - my_left + Physics2D.defaultContactOffset * 2);
         //transform.position += Vector3.right * (nonAlloc[0].bounds.max.x - (transform.position.x - this.size.x / 2));
         velocity.x = 0;
     }
@@ -179,14 +181,14 @@ public class CharacterController2D : MonoBehaviour
     private void ResolveRight(Vector2 displacement)
     {
         float my_right = transform.position.x + this.size.x / 2;
-        transform.position += Vector3.right * (Mathf.Round(my_right) - my_right - Physics2D.defaultContactOffset);
+        transform.position += Vector3.right * (Mathf.Round(my_right) - my_right - Physics2D.defaultContactOffset * 2);
         velocity.x = 0;
     }
 
     private void ResolveTop(Vector2 displacement)
     {
         float my_top = transform.position.y + this.size.y / 2;
-        transform.position += Vector3.up * (Mathf.Round(my_top) - my_top - Physics2D.defaultContactOffset);
+        transform.position += Vector3.up * (Mathf.Round(my_top) - my_top - Physics2D.defaultContactOffset * 2);
         velocity.y = 0;
     }
 
