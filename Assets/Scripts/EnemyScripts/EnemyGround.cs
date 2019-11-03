@@ -72,7 +72,6 @@ public class EnemyGround : Enemy
         {
             xComp = -xComp;
             render.flipX = !render.flipX;
-            Debug.Log(xComp);
         }
         if (!knocked)
         {
