@@ -8,20 +8,23 @@ public class PlayerAttack : MonoBehaviour
     public GameObject hitBox;
     public float attackReach;
     public float duration;
-    private Animator animator;
-    
+    private Animator anim;
+    private int attackHash = Animator.StringToHash("Attack");
 
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.K))
+        {
+            PlayAttackAnimation();
             StartCoroutine(FlashHitbox(duration));
+        }
     }
 
     IEnumerator FlashHitbox(float seconds)
@@ -29,5 +32,10 @@ public class PlayerAttack : MonoBehaviour
         GameObject newHitBox = Instantiate(hitBox, transform.position + new Vector3(attackReach, 0f, 0f), transform.rotation);
         yield return new WaitForSeconds(seconds);
         Destroy(newHitBox);
+    }
+
+    void PlayAttackAnimation()
+    {
+        anim.SetTrigger(attackHash);
     }
 }

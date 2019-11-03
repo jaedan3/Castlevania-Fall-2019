@@ -541,7 +541,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1755670353}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.29, y: -0.74, z: -1.4066416}
+  m_LocalPosition: {x: -4.55, y: 0.63, z: -1.4066416}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -691,12 +691,12 @@ PrefabInstance:
     - target: {fileID: 385311854693731304, guid: 935d90f7eab55754b9cc136fc9336b74,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.59
+      value: -1.03
       objectReference: {fileID: 0}
     - target: {fileID: 385311854693731304, guid: 935d90f7eab55754b9cc136fc9336b74,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.94
+      value: -0.93
       objectReference: {fileID: 0}
     - target: {fileID: 385311854693731304, guid: 935d90f7eab55754b9cc136fc9336b74,
         type: 3}
@@ -775,6 +775,7 @@ MonoBehaviour:
   minMovement: 0
   upGravity: 8
   downGravity: 32
+  maxFallSpeed: 60
   grounded: 0
   applyLowGrav: 0
   ignoringOneWayPlatforms: 0
