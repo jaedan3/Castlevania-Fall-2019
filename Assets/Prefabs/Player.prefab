@@ -98,6 +98,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xAxis: Horizontal
   yAxis: Vertical
+  maxVelocity: 5
+  camAccelerationX: 2
+  camAccelerationY: 4
   bounds: 0.5
 --- !u!1 &7662536312996070386
 GameObject:
@@ -200,7 +203,7 @@ MonoBehaviour:
   minMovement: 0
   upGravity: 8
   downGravity: 32
-  maxFallSpeed: 60
+  maxFallSpeed: 30
   grounded: 0
   applyLowGrav: 0
   ignoringOneWayPlatforms: 0

@@ -53,7 +53,7 @@ public class CharacterController2D : MonoBehaviour
         if (!grounded)
         {
             velocity += Vector3.down * delta * (velocity.y > 0 && applyLowGrav ? upGravity : downGravity);
-            if (velocity.y < -maxFallSpeed) { velocity += Vector3.up * (velocity.y - maxFallSpeed); }
+            if (velocity.y < -maxFallSpeed) { velocity += Vector3.up * (-maxFallSpeed - velocity.y); print(velocity.y); }
         }
 
         if (velocity.sqrMagnitude <= minMovement * minMovement) { return; }
