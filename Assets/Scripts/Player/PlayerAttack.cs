@@ -30,6 +30,7 @@ public class PlayerAttack : MonoBehaviour
     IEnumerator FlashHitbox(float seconds)
     {
         GameObject newHitBox = Instantiate(hitBox, transform.position + new Vector3(attackReach, 0f, 0f), transform.rotation);
+        newHitBox.GetComponent<AttackHitboxScript>().Initialize(gameObject, attackReach);
         yield return new WaitForSeconds(seconds);
         Destroy(newHitBox);
     }

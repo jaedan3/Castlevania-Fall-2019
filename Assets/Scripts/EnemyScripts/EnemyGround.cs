@@ -13,7 +13,7 @@ public class EnemyGround : Enemy
     void Start()
     {
         /////////////////////////////// GET COMPONENTS!
-        HP = 100;
+        currentHealth = 100;
         rb2d = GetComponent<Rigidbody2D>();
         rb2d.freezeRotation = true;
         animator = GetComponent<Animator>();
@@ -42,8 +42,9 @@ public class EnemyGround : Enemy
     {
         if (collision.collider.tag == "Attack") // When collided with an attack
         {
-            if ((damage(20)) > 0) // if HP is greator than 0, call KB(knockback)
+            if (currentHealth > 0) // if HP is greator than 0, call KB(knockback)
             {
+                currentHealth = damage(20);
                 KB(collision.collider.transform.position.x < transform.position.x ? 1 : -1);
                 knocked = true;
                 animator.SetBool("Air", true);
