@@ -322,7 +322,7 @@ GameObject:
   - component: {fileID: 1527370013}
   - component: {fileID: 1527370012}
   - component: {fileID: 1527370014}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Hitbox
   m_TagString: Attack
   m_Icon: {fileID: 0}
