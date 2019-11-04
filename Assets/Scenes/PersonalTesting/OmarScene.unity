@@ -403,7 +403,7 @@ GameObject:
   - component: {fileID: 1755670356}
   - component: {fileID: 1755670355}
   - component: {fileID: 1755670354}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -514,7 +514,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1755670353}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.55, y: 0.63, z: -1.4066416}
+  m_LocalPosition: {x: -5.05, y: 0.32, z: -1.4066416}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -858,7 +858,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitBox: {fileID: 62388132155919483, guid: 577e2d40f2fc6454c836f6815b9e169e, type: 3}
   attackReach: 2
-  duration: 0.45
+  duration: 0.2
 --- !u!114 &3294413500680671859
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -69,7 +69,7 @@ public class EnemyGround : Enemy
     void Update()
     {
         RaycastHit2D HitWall = Physics2D.Linecast(transform.position, new Vector2(transform.position.x + Mathf.Sign(xComp) , transform.position.y-0.5f));
-        if(HitWall.collider == true)
+        if(HitWall.collider == true && HitWall.collider.tag != "Attack")
         {
             xComp = -xComp;
             render.flipX = !render.flipX;

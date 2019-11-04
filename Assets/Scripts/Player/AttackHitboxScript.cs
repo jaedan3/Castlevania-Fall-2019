@@ -7,9 +7,12 @@ public class AttackHitboxScript : MonoBehaviour
 
     private GameObject player;
     private float distance;
-
+    private SpriteRenderer RD;
     public void Initialize(GameObject target_player, float dist)
     {
+        RD = GetComponent<SpriteRenderer>();
+        RD.flipX = target_player.GetComponent<SpriteRenderer>().flipX;
+        Debug.Log(target_player.GetComponent<SpriteRenderer>().flipX);
         player = target_player;
         distance = dist;
     }
