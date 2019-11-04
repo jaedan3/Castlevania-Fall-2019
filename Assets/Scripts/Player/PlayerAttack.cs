@@ -28,6 +28,7 @@ public class PlayerAttack : MonoBehaviour
 
     IEnumerator FlashHitbox(float seconds)
     {
+        yield return new WaitForSeconds(0.2f);
         GameObject newHitBox = Instantiate(hitBox, transform.position + new Vector3(attackReach * (GetComponent<SpriteRenderer>().flipX ? -1 : 1), 0f, 0f), transform.rotation);
         newHitBox.GetComponent<AttackHitboxScript>().Initialize(gameObject, attackReach * (GetComponent<SpriteRenderer>().flipX ? -1 : 1),GetComponent<Abilities>().Absorb);
         yield return new WaitForSeconds(seconds);
