@@ -20,7 +20,6 @@ public class PlayerCamera : MonoBehaviour
     private Vector2 vel;
     private Vector2 easeTo;
     private Vector2 truePos;
-
     // Start is called before the first frame update
     void Start()
     {

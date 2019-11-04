@@ -42,9 +42,10 @@ public class EnemyGround : Enemy
     {
         if (collision.collider.tag == "Attack") // When collided with an attack
         {
+            Debug.Log("Hit");
             if (currentHealth > 0) // if HP is greator than 0, call KB(knockback)
             {
-                currentHealth = damage(20);
+                currentHealth -= 20;
                 KB(collision.collider.transform.position.x < transform.position.x ? 1 : -1);
                 knocked = true;
                 animator.SetBool("Air", true);

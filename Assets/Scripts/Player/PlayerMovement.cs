@@ -60,12 +60,11 @@ public class PlayerMovement : MonoBehaviour
         }
         if (controller.velocity.x < 0)
         {
-            transform.eulerAngles = new Vector3(0, 180, 0);
-// spriteRenderer.flipX = true;
+             spriteRenderer.flipX = true;
         }
         else if (controller.velocity.x > 0)
         {
-            transform.eulerAngles = new Vector3(0, 0, 0);
+            spriteRenderer.flipX = false;
         }
         animator.SetFloat("XSpeed", Mathf.Abs(controller.velocity.x));
         animator.SetFloat("YSpeed", Mathf.Abs(controller.velocity.y));
