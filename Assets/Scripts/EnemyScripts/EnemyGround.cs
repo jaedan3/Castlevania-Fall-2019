@@ -42,24 +42,30 @@ public class EnemyGround : Enemy
     {
         if (col.gameObject.tag == "Attack" && !dying) // When collided with an attack
         {
-            Debug.Log("Hit");
-            if (currentHealth > 0) // if HP is greator than 0, call KB(knockback)
+
+            damage(20);
+            if (currentHealth > 0 && !dying) // if HP is greator than 0, call KB(knockback)
             {
-                damage(20);
                 KB(col.gameObject.GetComponent<SpriteRenderer>().flipX ? -1 : 1);
                 knocked = true;
                 animator.SetBool("Air", true);
             }
             else                //########################## DYING
             {
-                if (true)
+                if (!col.gameObject.GetComponent<AttackHitboxScript>().absorbing)
                 {
                     Random.InitState(System.DateTime.Now.Second);   //######    Random Seed with current time in seconds
                     animator.SetTrigger(Random.Range(0, 1.0f) >= 0.5f ? "death" : "death2");    // 50 50 chance to play either animation
+                    Destroy(gameObject, 1.5f);
+                }
+                else
+                {
+                    render.flipX = col.gameObject.GetComponent<SpriteRenderer>().flipX;
+                    animator.SetTrigger("deathAlt");
+                    Destroy(gameObject, 0.25f);
                 }
                 dying = true;
                 xComp = 0;
-                Destroy(gameObject, 1.5f);
 
             }
         }
@@ -72,12 +78,12 @@ public class EnemyGround : Enemy
     {
 
         RaycastHit2D HitWall = Physics2D.Linecast(transform.position, new Vector2(transform.position.x + Mathf.Sign(xComp) , transform.position.y-0.5f));
-        if(HitWall.collider == true && HitWall.collider.tag != "Attack")
+        if(HitWall.collider == true && HitWall.collider.tag != "Attack" && !dying)
         {
             xComp = -xComp;
             render.flipX = !render.flipX;
         }
-        if (!knocked)
+        if (!(knocked || dying))
         {
             movement();
         }

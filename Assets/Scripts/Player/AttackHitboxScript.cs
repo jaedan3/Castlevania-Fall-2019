@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AttackHitboxScript : MonoBehaviour
 {
-    private bool absorbing;
+    public bool absorbing;
     private GameObject player;
     private float distance;
     private SpriteRenderer RD;
