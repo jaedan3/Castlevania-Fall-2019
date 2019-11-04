@@ -45,7 +45,7 @@ public class EnemyGround : Enemy
             Debug.Log("Hit");
             if (currentHealth > 0) // if HP is greator than 0, call KB(knockback)
             {
-                currentHealth -= 20;
+                damage(20);
                 KB(col.gameObject.GetComponent<SpriteRenderer>().flipX ? -1 : 1);
                 knocked = true;
                 animator.SetBool("Air", true);

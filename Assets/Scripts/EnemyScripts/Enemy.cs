@@ -32,6 +32,6 @@ abstract public class Enemy : MonoBehaviour
 
     protected int damage(int power)
     {
-        return HP-=power;
+        return currentHealth-=power;
     }
 }
