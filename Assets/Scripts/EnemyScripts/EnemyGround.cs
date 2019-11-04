@@ -10,6 +10,7 @@ public class EnemyGround : Enemy
     // private Transform wallDetect;
     public float xComp = 3;
     bool knocked = false;
+    private bool dying = false;
     void Start()
     {
         /////////////////////////////// GET COMPONENTS!
@@ -28,7 +29,8 @@ public class EnemyGround : Enemy
 
     void KB(float dir)// Knock back
     {
-        rb2d.velocity = new Vector2(dir * 3, 7);// Knocked back for 3 units back, 7 units up
+        rb2d.velocity = new Vector2(dir * 3, 7);// Knocked back for 3 units back, 10 units up
+        Debug.Log(rb2d.velocity);
         xComp = -(dir * 3); // moves towards the source of the damage
     }
 
@@ -36,17 +38,15 @@ public class EnemyGround : Enemy
     {
         rb2d.velocity = new Vector2(xComp, rb2d.velocity.y);
     }
-
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D col)
     {
-        if (collision.collider.tag == "Attack") // When collided with an attack
+        if (col.gameObject.tag == "Attack" && !dying) // When collided with an attack
         {
             Debug.Log("Hit");
             if (currentHealth > 0) // if HP is greator than 0, call KB(knockback)
             {
                 currentHealth -= 20;
-                KB(collision.collider.transform.position.x < transform.position.x ? 1 : -1);
+                KB(col.gameObject.GetComponent<SpriteRenderer>().flipX ? -1 : 1);
                 knocked = true;
                 animator.SetBool("Air", true);
             }
@@ -57,17 +57,20 @@ public class EnemyGround : Enemy
                     Random.InitState(System.DateTime.Now.Second);   //######    Random Seed with current time in seconds
                     animator.SetTrigger(Random.Range(0, 1.0f) >= 0.5f ? "death" : "death2");    // 50 50 chance to play either animation
                 }
+                dying = true;
                 xComp = 0;
                 Destroy(gameObject, 1.5f);
-                
+
             }
         }
     }
 
 
+
     // Update is called once per frame
     void Update()
     {
+
         RaycastHit2D HitWall = Physics2D.Linecast(transform.position, new Vector2(transform.position.x + Mathf.Sign(xComp) , transform.position.y-0.5f));
         if(HitWall.collider == true && HitWall.collider.tag != "Attack")
         {

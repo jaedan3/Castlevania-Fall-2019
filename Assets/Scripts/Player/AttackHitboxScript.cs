@@ -12,7 +12,6 @@ public class AttackHitboxScript : MonoBehaviour
     {
         RD = GetComponent<SpriteRenderer>();
         RD.flipX = target_player.GetComponent<SpriteRenderer>().flipX;
-        Debug.Log(target_player.GetComponent<SpriteRenderer>().flipX);
         player = target_player;
         distance = dist;
     }
