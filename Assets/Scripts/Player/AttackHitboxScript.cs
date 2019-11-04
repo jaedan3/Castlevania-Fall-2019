@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class AttackHitboxScript : MonoBehaviour
 {
-
+    private bool absorbing;
     private GameObject player;
     private float distance;
     private SpriteRenderer RD;
-    public void Initialize(GameObject target_player, float dist)
+    public void Initialize(GameObject target_player, float dist, bool absorb)
     {
+        absorbing = absorb;
         RD = GetComponent<SpriteRenderer>();
         RD.flipX = target_player.GetComponent<SpriteRenderer>().flipX;
         player = target_player;
