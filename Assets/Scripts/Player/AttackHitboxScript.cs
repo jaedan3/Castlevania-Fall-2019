@@ -32,6 +32,5 @@ public class AttackHitboxScript : MonoBehaviour
     private void GetDirection()
     {
         GetComponent<SpriteRenderer>().flipX = player.GetComponent<SpriteRenderer>().flipX;
-        if()
     }
 }
