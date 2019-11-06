@@ -19,10 +19,21 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (Input.GetKeyDown(KeyCode.K))
         {
-            PlayAttackAnimation();
-            StartCoroutine(FlashHitbox(duration));
+            Debug.Log(Input.GetAxis("Vertical"));
+            if (Input.GetAxis("Vertical") > 0)
+            {
+                
+                anim.SetTrigger("AttackUP");
+            }
+            //else if{ } ####################### PLACE HOLDER FOR ATTACKING DOWN
+            else
+            {
+                PlayAttackAnimation();
+                StartCoroutine(FlashHitbox(duration));
+            }
         }
     }
 
