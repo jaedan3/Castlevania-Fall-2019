@@ -27,21 +27,40 @@ public class PlayerAttack : MonoBehaviour
             {
                 
                 anim.SetTrigger("AttackUP");
+
+                StartCoroutine(FlashHitbox(duration, new Vector3(0,0,90)));
             }
             //else if{ } ####################### PLACE HOLDER FOR ATTACKING DOWN
             else
             {
                 PlayAttackAnimation();
-                StartCoroutine(FlashHitbox(duration));
+                StartCoroutine(FlashHitbox(duration, new Vector3(0, GetComponent<SpriteRenderer>().flipX ? 180 : 0, 0)));
+
             }
         }
     }
 
-    IEnumerator FlashHitbox(float seconds)
+    IEnumerator FlashHitbox(float seconds, Vector3 angle)
     {
+        bool facingLeft = GetComponent<SpriteRenderer>().flipX;
+
+        Vector3 DistForInit = new Vector3(attackReach * (facingLeft ? -1 : 1), 0, 0);
         yield return new WaitForSeconds(0.2f);
-        GameObject newHitBox = Instantiate(hitBox, transform.position + new Vector3(attackReach * (GetComponent<SpriteRenderer>().flipX ? -1 : 1), 0f, 0f), transform.rotation);
-        newHitBox.GetComponent<AttackHitboxScript>().Initialize(gameObject, attackReach * (GetComponent<SpriteRenderer>().flipX ? -1 : 1),GetComponent<Abilities>().Absorb);
+        GameObject newHitBox;
+        if (angle.z > 0)
+            {
+            DistForInit = new Vector3(facingLeft ? 0.3f : 0.2f, attackReach, 0f);
+            newHitBox = Instantiate(hitBox, transform.position +DistForInit, Quaternion.Euler(angle));
+
+            }
+        else
+        {
+            newHitBox = Instantiate(hitBox, transform.position + new Vector3(attackReach * (facingLeft ? -1 : 1), 0f, 0f), Quaternion.Euler(angle));
+
+        }
+
+
+        newHitBox.GetComponent<AttackHitboxScript>().Initialize(gameObject, DistForInit,GetComponent<Abilities>().Absorb);
         yield return new WaitForSeconds(seconds);
         Destroy(newHitBox);
     }

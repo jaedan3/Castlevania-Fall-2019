@@ -6,15 +6,14 @@ public class AttackHitboxScript : MonoBehaviour
 {
     public bool absorbing;
     private GameObject player;
-    private float distance;
+    private Vector3 distance;
     private SpriteRenderer RD;
-    public void Initialize(GameObject target_player, float dist, bool absorb)
+    public void Initialize(GameObject target_player, Vector3 distVect, bool absorb)
     {
         absorbing = absorb;
         RD = GetComponent<SpriteRenderer>();
-        RD.flipX = target_player.GetComponent<SpriteRenderer>().flipX;
         player = target_player;
-        distance = dist;
+        distance = distVect;
     }
 
     // Start is called before the first frame update
@@ -27,11 +26,12 @@ public class AttackHitboxScript : MonoBehaviour
     void Update()
     {
         GetDirection();
-        transform.position = player.transform.position + new Vector3(distance, 0f, 0f);
+        transform.position = player.transform.position + distance;
     }
 
     private void GetDirection()
     {
-        //this.GetComponent<PlayerMovement>
+        GetComponent<SpriteRenderer>().flipX = player.GetComponent<SpriteRenderer>().flipX;
+        if()
     }
 }
