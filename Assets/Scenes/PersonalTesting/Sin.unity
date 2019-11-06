@@ -335,11 +335,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6405923504815523713, guid: 1ab88a9970599b6468d4ab1f5cd3715b,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ab88a9970599b6468d4ab1f5cd3715b, type: 3}
 --- !u!1 &868180974
@@ -2734,41 +2729,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!1 &911909818 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7662536312996070386, guid: 1ab88a9970599b6468d4ab1f5cd3715b,
-    type: 3}
-  m_PrefabInstance: {fileID: 624523984}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &911909819
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 911909818}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e36cdd218cf0b944875795853560a00, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitBox: {fileID: 62388132155919483, guid: 577e2d40f2fc6454c836f6815b9e169e, type: 3}
-  attackReach: 2
-  duration: 0.16
---- !u!114 &911909820
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 911909818}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2bfaca832a7fbc4794fc16c7cde2cdd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Absorb: 1
-  Grapple: 0
 --- !u!1001 &1009610979
 PrefabInstance:
   m_ObjectHideFlags: 0

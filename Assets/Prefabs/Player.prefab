@@ -115,7 +115,8 @@ GameObject:
   - component: {fileID: 5950164886641880911}
   - component: {fileID: 7688394892065752172}
   - component: {fileID: 675635566131245498}
-  - component: {fileID: 2977169614842721909}
+  - component: {fileID: 911909819}
+  - component: {fileID: 911909820}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -175,7 +176,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 1951827798799853723, guid: 81fd9f93b08e9cc458e7d61138d05a9c,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -240,7 +241,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2977169614842721909
+--- !u!114 &911909819
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -254,4 +255,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitBox: {fileID: 62388132155919483, guid: 577e2d40f2fc6454c836f6815b9e169e, type: 3}
   attackReach: 2
-  duration: 0.2
+  duration: 0.16
+--- !u!114 &911909820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7662536312996070386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2bfaca832a7fbc4794fc16c7cde2cdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Absorb: 1
+  Grapple: 0
