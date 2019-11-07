@@ -69,6 +69,11 @@ public class EnemyGround : Enemy
 
             }
         }
+        else if (col.gameObject.tag == "Player" && !dying)
+        {
+            print("hit thingy");
+            col.gameObject.GetComponent<PlayerHurtbox>().Response(this.gameObject);
+        }
     }
 
 
