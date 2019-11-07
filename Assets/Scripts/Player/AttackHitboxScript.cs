@@ -8,7 +8,7 @@ public class AttackHitboxScript : MonoBehaviour
     private GameObject player;
     private Vector3 distance;
     private SpriteRenderer RD;
-    public void Initialize(GameObject target_player, Vector3 distVect, bool absorb)
+    public void Initialize(GameObject target_player, Vector2 distVect, bool absorb)
     {
         absorbing = absorb;
         RD = GetComponent<SpriteRenderer>();
@@ -26,10 +26,11 @@ public class AttackHitboxScript : MonoBehaviour
     void Update()
     {
         GetDirection();
-        transform.position = player.transform.position + distance;
     }
-
+    
     private void GetDirection()
     {
+        RD.flipX = player.GetComponent<SpriteRenderer>().flipX;
+        transform.position = new Vector3(player.transform.position.x + (player.GetComponent<SpriteRenderer>().flipX ? -distance.x : distance.x),player.transform.position.y+ distance.y);
     }
 }
