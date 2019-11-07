@@ -18,7 +18,13 @@ public class TongueShotAbility : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        tongueDirection = ( new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) ).normalized;
+
+        tongueDirection = ( new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) ).normalized;
+        RaycastHit2D HitWall = Physics2D.Raycast(transform.position, tongueDirection,1 );
+        if (HitWall.collider == true)
+        {
+            rb2d.velocity = Vector2.zero;
+        }
         if (Input.GetKeyDown(KeyCode.L))
         {
             Debug.DrawLine(transform.position, transform.position + ( tongueDirection * reach ) );
