@@ -45,24 +45,22 @@ public class PlayerAttack : MonoBehaviour
     IEnumerator FlashHitbox(float seconds, string key)
     {
         bool facingLeft = GetComponent<SpriteRenderer>().flipX;
+        yield return new WaitForSeconds(0.25f);
+        Vector3 DistForInit = new Vector2(attackReach, 0);
 
-        Vector3 DistForInit = new Vector3(attackReach * (facingLeft ? -1 : 1), 0, 0);
-        yield return new WaitForSeconds(0.2f);
         GameObject newHitBox;
         if (key == "UP")
             {
-            DistForInit = new Vector3(facingLeft ? 0.3f : 0.2f, attackReach, 0f);
+            DistForInit = new Vector2(0.25f, attackReach);
             newHitBox = Instantiate(hitBoxUP, transform.position +DistForInit, Quaternion.identity);
-
-            newHitBox.GetComponent<SpriteRenderer>().flipX = facingLeft;
         }
         else
         {
             newHitBox = Instantiate(hitBox, transform.position + new Vector3(attackReach * (facingLeft ? -1 : 1), 0f, 0f), Quaternion.identity);
 
-            newHitBox.GetComponent<SpriteRenderer>().flipX = facingLeft;
+           
         }
-
+        newHitBox.GetComponent<SpriteRenderer>().flipX = facingLeft;
         newHitBox.GetComponent<AttackHitboxScript>().Initialize(gameObject, DistForInit,GetComponent<Abilities>().Absorb);
         yield return new WaitForSeconds(seconds);
         Destroy(newHitBox);
