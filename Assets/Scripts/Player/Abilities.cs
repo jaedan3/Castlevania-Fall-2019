@@ -6,5 +6,7 @@ public class Abilities : MonoBehaviour
 {
     public bool Absorb = false;
     public bool Grapple = false;
+    public TongueShotAbility tongueShot;
+    
 
 }

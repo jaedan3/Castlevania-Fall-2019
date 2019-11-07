@@ -117,6 +117,8 @@ GameObject:
   - component: {fileID: 675635566131245498}
   - component: {fileID: 911909819}
   - component: {fileID: 911909820}
+  - component: {fileID: 1064695255}
+  - component: {fileID: 1064695254}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -269,4 +271,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Absorb: 1
-  Grapple: 0
+  Grapple: 1
+  tongueShot: {fileID: 1064695254}
+--- !u!50 &1064695255
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7662536312996070386}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &1064695254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7662536312996070386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38855645d20616d8f842809e126a5345, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reach: 5
+  pullPower: 20
