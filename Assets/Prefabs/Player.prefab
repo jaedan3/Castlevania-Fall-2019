@@ -256,6 +256,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitBox: {fileID: 62388132155919483, guid: 577e2d40f2fc6454c836f6815b9e169e, type: 3}
+  hitBoxUP: {fileID: 3193609910132672600, guid: 4fe784907b0cefc4e920ac78300b7195,
+    type: 3}
   attackReach: 2
   duration: 0.16
 --- !u!114 &911909820
