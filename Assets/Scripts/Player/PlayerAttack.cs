@@ -62,8 +62,6 @@ public class PlayerAttack : MonoBehaviour
         }
         newHitBox.GetComponent<SpriteRenderer>().flipX = facingLeft;
         newHitBox.GetComponent<AttackHitboxScript>().Initialize(gameObject, DistForInit,GetComponent<Abilities>().Absorb);
-        yield return new WaitForSeconds(seconds);
-        Destroy(newHitBox);
     }
 
     void PlayAttackAnimation(int hash)

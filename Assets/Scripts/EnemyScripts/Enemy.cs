@@ -34,4 +34,6 @@ abstract public class Enemy : MonoBehaviour
     {
         return currentHealth-=power;
     }
+
+
 }

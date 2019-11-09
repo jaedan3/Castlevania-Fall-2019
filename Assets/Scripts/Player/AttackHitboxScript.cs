@@ -8,6 +8,8 @@ public class AttackHitboxScript : MonoBehaviour
     private GameObject player;
     private Vector3 distance;
     private SpriteRenderer RD;
+
+    private int destroyCount = 0;
     public void Initialize(GameObject target_player, Vector2 distVect, bool absorb)
     {
         absorbing = absorb;
@@ -32,5 +34,12 @@ public class AttackHitboxScript : MonoBehaviour
     {
         RD.flipX = player.GetComponent<SpriteRenderer>().flipX;
         transform.position = new Vector3(player.transform.position.x + (player.GetComponent<SpriteRenderer>().flipX ? -distance.x : distance.x),player.transform.position.y+ distance.y);
+    }
+    private void FixedUpdate()
+    {
+        if (++destroyCount > 10)
+        {
+            Destroy(gameObject);
+        }
     }
 }
