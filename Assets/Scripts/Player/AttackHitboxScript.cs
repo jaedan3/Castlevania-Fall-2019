@@ -37,9 +37,8 @@ public class AttackHitboxScript : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (++destroyCount > 10)
-        {
+        destroyCount++;
+        if (destroyCount > 10)
             Destroy(gameObject);
-        }
     }
 }
