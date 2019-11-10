@@ -3,16 +3,19 @@
 [RequireComponent(typeof(CharacterController2D))]
 public class PlayerHurtbox : MonoBehaviour
 {
-    int maxHealth = 6;
-    float invincibilityPeriod = 1;
+    public int maxHealth = 6;
+    public float invincibilityPeriod = 1;
+    public float knockbackPeriod = 0.5f;
 
     //Vector2 knockback;
     CharacterController2D controller;
     SpriteRenderer spriteRenderer;
+    PlayerMovement playerMovement;
 
-    private int health;
+    public int health;
     // named different to prevent confusion.
-    private float invincibilityTimer = 0;
+    public float knockbackTimer = 0;
+    public float invincibilityTimer = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -20,11 +23,18 @@ public class PlayerHurtbox : MonoBehaviour
         health = maxHealth;
         controller = GetComponent<CharacterController2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        playerMovement = GetComponent<PlayerMovement>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (knockbackTimer > 0)
+        {
+            knockbackTimer -= Time.fixedDeltaTime;
+        }
+        playerMovement.airControl = knockbackTimer <= 0;
+
         if (invincibilityTimer <= 0)
         {
             Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position, controller.size, 0, Physics2D.AllLayers);
@@ -54,6 +64,11 @@ public class PlayerHurtbox : MonoBehaviour
         if (invincibilityTimer <= 0)
         {
             invincibilityTimer = invincibilityPeriod;
+            knockbackTimer = knockbackPeriod;
+            controller.velocity = Vector3.up * 10;
+            // assumes ant position is center of ant
+            controller.velocity += Vector3.right * 5 * Mathf.Sign(this.transform.position.x - enemy.transform.position.x);
+            controller.grounded = false;
         }
     }
 }

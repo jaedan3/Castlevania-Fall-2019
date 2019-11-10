@@ -8,7 +8,8 @@ public class PlayerMovement : MonoBehaviour
     SpriteRenderer spriteRenderer;
     CharacterController2D controller;
     Animator animator;
-    private bool lastUpdateGrounded;
+
+    public bool airControl = true;
 
     void Start()
     {
@@ -43,31 +44,35 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             controller.applyLowGrav = Input.GetButton("Jump") && controller.applyLowGrav;
-            controller.velocity.x = Mathf.MoveTowards(controller.velocity.x, Input.GetAxis("Horizontal") * 5, 1f);
+            // couplingggggg ugghhhh
+            if (airControl)
+            {
+                controller.velocity.x = Mathf.MoveTowards(controller.velocity.x, Input.GetAxis("Horizontal") * 5, 1f);
+            }
         }
         controller.Move(Time.fixedDeltaTime);
-        if (controller.grounded != lastUpdateGrounded)
-        {
-            if (controller.grounded)
-            {
-                animator.SetTrigger("JustLanded");
-            }
-            else
-            {
-                animator.SetTrigger("JustAirborn");
-            }
-            lastUpdateGrounded = controller.grounded;
-        }
-        if (controller.velocity.x < 0)
-        {
-             spriteRenderer.flipX = true;
-        }
-        else if (controller.velocity.x > 0)
-        {
-            spriteRenderer.flipX = false;
-        }
-        animator.SetFloat("XSpeed", Mathf.Abs(controller.velocity.x));
-        animator.SetFloat("YSpeed", Mathf.Abs(controller.velocity.y));
-        animator.SetFloat("YVel", controller.velocity.y);
+        //if (controller.grounded != lastUpdateGrounded)
+        //{
+        //    if (controller.grounded)
+        //    {
+        //        animator.SetTrigger("JustLanded");
+        //    }
+        //    else
+        //    {
+        //        animator.SetTrigger("JustAirborn");
+        //    }
+        //    lastUpdateGrounded = controller.grounded;
+        //}
+        //if (controller.velocity.x < 0)
+        //{
+        //     spriteRenderer.flipX = true;
+        //}
+        //else if (controller.velocity.x > 0)
+        //{
+        //    spriteRenderer.flipX = false;
+        //}
+        //animator.SetFloat("XSpeed", Mathf.Abs(controller.velocity.x));
+        //animator.SetFloat("YSpeed", Mathf.Abs(controller.velocity.y));
+        //animator.SetFloat("YVel", controller.velocity.y);
     }
 }
