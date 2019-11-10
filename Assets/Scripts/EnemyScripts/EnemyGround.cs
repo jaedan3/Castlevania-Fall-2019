@@ -52,18 +52,10 @@ public class EnemyGround : Enemy
             }
             else                //########################## DYING
             {
-                if (!col.gameObject.GetComponent<AttackHitboxScript>().absorbing)
-                {
-                    Random.InitState(System.DateTime.Now.Second);   //######    Random Seed with current time in seconds
-                    animator.SetTrigger(Random.Range(0, 1.0f) >= 0.5f ? "death" : "death2");    // 50 50 chance to play either animation
-                    Destroy(gameObject, 1.5f);
-                }
-                else
-                {
-                    render.flipX = col.gameObject.GetComponent<SpriteRenderer>().flipX;
-                    animator.SetTrigger("deathAlt");
-                    Destroy(gameObject, 0.25f);
-                }
+
+                Random.InitState(System.DateTime.Now.Second);  //######    Random Seed with current time in seconds
+                animator.SetTrigger(Random.Range(0, 1.0f) >= 0.5f ? "death" : "death2");   // 50 50 chance to play either animation
+                Destroy(gameObject, 1.5f);
                 dying = true;
                 xComp = 0;
 
