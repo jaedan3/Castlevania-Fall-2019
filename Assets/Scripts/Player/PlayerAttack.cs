@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +14,9 @@ public class PlayerAttack : MonoBehaviour
     private Animator anim;
     private int attackHash = Animator.StringToHash("Attack");
     private int attackUpHash = Animator.StringToHash("AttackUP");
+
+    private String[] stateBlacklist = { "Knockback", "Death_Fall", "Death" };
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,8 +26,7 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.K) && Time.time > ATTACKTIME)
+        if (Input.GetKeyDown(KeyCode.K) && Time.time > ATTACKTIME && this.AttackingState())
         {
             ATTACKTIME = Time.time + attackCD;
             Debug.Log(Input.GetAxis("Vertical"));
@@ -42,6 +45,18 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
+    private bool AttackingState()
+    {
+        foreach (String blacklisted in stateBlacklist)
+        {
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName(blacklisted))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
     IEnumerator FlashHitbox(float seconds, string key)
     {
         bool facingLeft = GetComponent<SpriteRenderer>().flipX;
@@ -50,7 +65,7 @@ public class PlayerAttack : MonoBehaviour
 
         GameObject newHitBox;
         if (key == "UP")
-            {
+        {
             DistForInit = new Vector2(0.25f, attackReach);
             newHitBox = Instantiate(hitBoxUP, transform.position +DistForInit, Quaternion.identity);
         }
