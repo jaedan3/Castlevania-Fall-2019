@@ -119,6 +119,8 @@ GameObject:
   - component: {fileID: 911909820}
   - component: {fileID: 1064695255}
   - component: {fileID: 1064695254}
+  - component: {fileID: 9064320314003609878}
+  - component: {fileID: 2816101827687101049}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -224,6 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27d2b4550bd0bce40957fa6b3fc9f9c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  airControl: 1
 --- !u!95 &675635566131245498
 Animator:
   serializedVersion: 3
@@ -255,6 +258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e36cdd218cf0b944875795853560a00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackCD: 0.3
   hitBox: {fileID: 62388132155919483, guid: 577e2d40f2fc6454c836f6815b9e169e, type: 3}
   hitBoxUP: {fileID: 3193609910132672600, guid: 4fe784907b0cefc4e920ac78300b7195,
     type: 3}
@@ -310,3 +314,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reach: 5
   pullPower: 20
+--- !u!114 &9064320314003609878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7662536312996070386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01cf4f80c6bec5d4194405303ecb5d36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 6
+  invincibilityPeriod: 1
+  knockbackPeriod: 0.5
+  health: 0
+  knockbackTimer: 0
+  invincibilityTimer: 0
+--- !u!114 &2816101827687101049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7662536312996070386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ed8b7b4d08ee8840965b716aef6b947, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
