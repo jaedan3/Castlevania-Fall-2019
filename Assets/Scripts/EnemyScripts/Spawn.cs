@@ -5,31 +5,33 @@ using UnityEngine;
 public class Spawn : MonoBehaviour
 {
     public GameObject ToBeSpawned;
-    private GameObject Player;
-    public Vector2 spawnLocation;
+    public GameObject Player;
+    public float range;
     Rect rect;
     // Start is called before the first frame update
     void Start()
     {
         float xlength = GetComponent<BoxCollider2D>().size.x;
         float ylength = GetComponent<BoxCollider2D>().size.y;
-        Player = GetComponent<SpawnSetup>().player;
         rect = new Rect(transform.position.x, transform.position.y, transform.position.x + xlength, transform.position.y + ylength);
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    // Update is called once per frame
+    private void Update()
     {
-        Debug.Log("SDFSDF");
-        if(collision.gameObject == Player)
+        if (Mathf.Pow(Player.transform.position.x - transform.position.x,2) + Mathf.Pow(Player.transform.position.y - transform.position.y, 2) < range)
         {
-            SpawnEnemy(ToBeSpawned, spawnLocation);
-            Destroy(gameObject);
+            SpawnEnemy();
         }
     }
-    // Update is called once per frame
-
-    void SpawnEnemy(GameObject Type, Vector3 loc)
+    void SpawnEnemy()
     {
-        GameObject spawned = Instantiate(Type, loc, Quaternion.identity);
-        spawned.GetComponent<Enemy>().target = Player;
+        foreach (Transform child in transform)
+        {
+            child.parent = null;
+            child.gameObject.SetActive(true);
+            child.GetComponent<Enemy>().target = Player;
+            
+        }
+        Destroy(gameObject, 1);
     }
 }
