@@ -34,10 +34,11 @@ public class EnemyAir : Enemy
         else
         {
             movement();
-            transform.position = new Vector2(Position.x, Position.y + amp * Mathf.Sin(Time.time * floating_rate));
 
         }
         Position += Velo;
+        if(!dying)
+            transform.position = new Vector2(Position.x, Position.y + amp * Mathf.Sin(Time.time * floating_rate));
 
     }
 
