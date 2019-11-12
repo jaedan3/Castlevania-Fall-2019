@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 228588140453043962}
   - component: {fileID: 228588140453043965}
-  - component: {fileID: 5618453817340446707}
   - component: {fileID: 4848075315783544365}
+  - component: {fileID: 6158902997899443307}
   m_Layer: 2
   m_Name: EnemyControl
   m_TagString: Untagged
@@ -59,19 +59,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 12.870098, y: 2}
   m_EdgeRadius: 0
---- !u!114 &5618453817340446707
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 228588140453043960}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7a52fe5bc6441e4ca272cc76f19ec9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
 --- !u!50 &4848075315783544365
 Rigidbody2D:
   serializedVersion: 4
@@ -93,3 +80,17 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &6158902997899443307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 228588140453043960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd5fbd7b33f1d014fafff11fee29a35a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 0}
+  range: 0

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Spawn : MonoBehaviour
 {
-    public GameObject ToBeSpawned;
     public GameObject Player;
     public float range;
     Rect rect;
