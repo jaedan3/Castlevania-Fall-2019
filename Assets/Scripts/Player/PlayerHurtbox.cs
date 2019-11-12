@@ -40,7 +40,6 @@ public class PlayerHurtbox : MonoBehaviour
             Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position, controller.size, 0, Physics2D.AllLayers);
             foreach (Collider2D collider in colliders)
             {
-                print(collider.gameObject.name);
                 if (collider.gameObject.tag.Equals("Enemy") && !collider.GetComponent<Enemy>().dying)
                 {
                     Response(collider.gameObject);
