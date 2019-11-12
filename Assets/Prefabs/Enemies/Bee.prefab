@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 5335291042648838513}
   - component: {fileID: 1507061815}
   - component: {fileID: 1507061814}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Bee
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: -4656658513182322354, guid: 85eba9755036eda46b1fdf5ac1848a8c,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -141,5 +141,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5c1c37872e2dd144991fc20c16d6570, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amp: 2
+  MaxSpeed: 0.6
+  amp: 0.1
+  accel: 0.05
   floating_rate: 2
+  player: {fileID: 0}

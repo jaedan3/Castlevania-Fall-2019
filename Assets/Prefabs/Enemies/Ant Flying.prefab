@@ -115,8 +115,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5c1c37872e2dd144991fc20c16d6570, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaxSpeed: 0.3
   amp: 1
+  accel: 0.02
   floating_rate: 1
+  player: {fileID: 0}
 --- !u!65 &567446585672537012
 BoxCollider:
   m_ObjectHideFlags: 0
