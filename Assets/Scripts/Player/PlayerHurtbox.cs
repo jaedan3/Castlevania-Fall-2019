@@ -41,7 +41,7 @@ public class PlayerHurtbox : MonoBehaviour
             foreach (Collider2D collider in colliders)
             {
                 print(collider.gameObject.name);
-                if (collider.gameObject.tag.Equals("Enemy"))
+                if (collider.gameObject.tag.Equals("Enemy") && !collider.GetComponent<Enemy>().dying)
                 {
                     Response(collider.gameObject);
                     break;

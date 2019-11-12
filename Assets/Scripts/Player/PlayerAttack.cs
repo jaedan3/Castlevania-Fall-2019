@@ -29,7 +29,6 @@ public class PlayerAttack : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.K) && Time.time > ATTACKTIME && this.AttackingState())
         {
             ATTACKTIME = Time.time + attackCD;
-            Debug.Log(Input.GetAxis("Vertical"));
             if (Input.GetAxis("Vertical") > 0)
             {
                 PlayAttackAnimation(attackUpHash);

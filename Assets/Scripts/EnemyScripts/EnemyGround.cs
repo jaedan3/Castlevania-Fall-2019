@@ -10,7 +10,6 @@ public class EnemyGround : Enemy
     // private Transform wallDetect;
     public float xComp = 3;
     bool knocked = false;
-    private bool dying = false;
     void Start()
     {
         /////////////////////////////// GET COMPONENTS!

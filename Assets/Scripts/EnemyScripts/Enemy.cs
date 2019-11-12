@@ -13,6 +13,8 @@ abstract public class Enemy : MonoBehaviour
     protected int HP;
     protected Rigidbody2D rb2d;
     protected bool stunned;
+    protected int stunCount = 25;
+    public bool dying = false;
     
     protected abstract void movement();
 
