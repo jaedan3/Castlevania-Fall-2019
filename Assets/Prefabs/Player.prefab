@@ -276,7 +276,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2bfaca832a7fbc4794fc16c7cde2cdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Absorb: 1
   Grapple: 1
   tongueShot: {fileID: 1064695254}
 --- !u!50 &1064695255
@@ -329,6 +328,7 @@ MonoBehaviour:
   maxHealth: 6
   invincibilityPeriod: 1
   knockbackPeriod: 0.5
+  spririt: {fileID: 5019705695117327929, guid: 5a43ae13d08eeb74bab3b424e95fd2d7, type: 3}
   health: 0
   knockbackTimer: 0
   invincibilityTimer: 0

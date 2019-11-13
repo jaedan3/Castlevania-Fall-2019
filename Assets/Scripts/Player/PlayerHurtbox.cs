@@ -6,7 +6,7 @@ public class PlayerHurtbox : MonoBehaviour
     public int maxHealth = 6;
     public float invincibilityPeriod = 1;
     public float knockbackPeriod = 0.5f;
-
+    public GameObject spririt; // SIN ADDED THIS 
     //Vector2 knockback;
     CharacterController2D controller;
     SpriteRenderer spriteRenderer;
@@ -63,7 +63,14 @@ public class PlayerHurtbox : MonoBehaviour
         if (invincibilityTimer <= 0)
         {
             invincibilityTimer = invincibilityPeriod;
+            if(health > 0)
             health--;///////////////////////////SIN ADDED THIS FOR HEALTH DISPLAY
+            else
+            {
+                Instantiate(spririt, transform.position, Quaternion.identity);
+            }
+            //////////////////////////////////////WHAT SIN ADDED ENDS HERE
+
             knockbackTimer = knockbackPeriod;
             controller.velocity = Vector3.up * 10;
             // assumes ant position is center of ant
