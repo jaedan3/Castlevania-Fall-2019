@@ -4769,4 +4769,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   speed: 0.3
-  healAmount: 0
+  healAmount: 2

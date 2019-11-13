@@ -18,6 +18,6 @@ public class TempHealthDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        text.text = "" + PHB.health;   
+        text.text = "Health: " + PHB.health;   
     }
 }
