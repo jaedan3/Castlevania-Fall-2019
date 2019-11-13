@@ -63,6 +63,7 @@ public class PlayerHurtbox : MonoBehaviour
         if (invincibilityTimer <= 0)
         {
             invincibilityTimer = invincibilityPeriod;
+            health--;///////////////////////////SIN ADDED THIS FOR HEALTH DISPLAY
             knockbackTimer = knockbackPeriod;
             controller.velocity = Vector3.up * 10;
             // assumes ant position is center of ant
