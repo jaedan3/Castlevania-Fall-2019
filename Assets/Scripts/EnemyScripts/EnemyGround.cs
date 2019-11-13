@@ -7,11 +7,13 @@ public class EnemyGround : Enemy
     // Rigidbody2D rg;
     Animator animator;
     SpriteRenderer render;
+    public float walkSpeed = 4;
     // private Transform wallDetect;
-    public float xComp = 3;
+    public float xComp;
     bool knocked = false;
     void Start()
     {
+        xComp = walkSpeed;
         /////////////////////////////// GET COMPONENTS!
         currentHealth = 100;
         rb2d = GetComponent<Rigidbody2D>();
@@ -30,7 +32,7 @@ public class EnemyGround : Enemy
     {
         rb2d.velocity = new Vector2(dir * 3, 7);// Knocked back for 3 units back, 10 units up
         Debug.Log(rb2d.velocity);
-        xComp = -(dir * 3); // moves towards the source of the damage
+        xComp = -(dir * walkSpeed); // moves towards the source of the damage
     }
 
     protected override void movement()
