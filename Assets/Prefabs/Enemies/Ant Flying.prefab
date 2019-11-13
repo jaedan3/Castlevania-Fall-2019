@@ -123,7 +123,7 @@ MonoBehaviour:
   dying: 0
   healPrefab: {fileID: 4455471157757689691, guid: f84d79dfc1c0b57488ef6351f883eb53,
     type: 3}
-  MaxSpeed: 0.1
+  MaxSpeed: 0.08
   amp: 1
   accel: 0.02
   floating_rate: 1
