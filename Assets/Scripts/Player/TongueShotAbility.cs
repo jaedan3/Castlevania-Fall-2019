@@ -14,10 +14,10 @@ public class TongueShotAbility : MonoBehaviour
     private Vector3[] points;
     private float distanceToTravel;
     private bool hooking;
-    private float shortenDistance;
+    
     public float reach;
     public float pullPower;
-
+    public float shortenDistance;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +26,6 @@ public class TongueShotAbility : MonoBehaviour
         lr = GetComponent<LineRenderer>();
         points = new Vector3[2];
         lr.positionCount = 2;
-        shortenDistance = 0.3f;
     }
 
     // Update is called once per frame
