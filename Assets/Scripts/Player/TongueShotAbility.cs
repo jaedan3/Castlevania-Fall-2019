@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class TongueShotAbility : MonoBehaviour
 {
-    private Vector3 tongueDirection;
+    
     private RaycastHit2D objHit;
     private Rigidbody2D rb2d;
+    private LineRenderer lr;
+    private Vector3 tongueDirection;
     private Vector3 ogPosition;
+    private Vector3 hitPosition;
+    private Vector3[] points;
     private float distanceToTravel;
     private bool hooking;
     private float shortenDistance;
@@ -19,20 +23,24 @@ public class TongueShotAbility : MonoBehaviour
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        lr = GetComponent<LineRenderer>();
+        points = new Vector3[2];
+        lr.positionCount = 2;
         shortenDistance = 0.3f;
     }
 
     // Update is called once per frame
     void Update()
     {
-
         tongueDirection = ( new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) ).normalized;
         RaycastHit2D HitWall = Physics2D.Raycast(transform.position, tongueDirection,1 );
-        if (hooking){ CheckPosition(); }
-        /*if (HitWall.collider == true)
+        if (hooking)
         {
-            rb2d.velocity = Vector2.zero;
-        }*/
+            CheckPosition();
+            points[0] = transform.position;
+            points[1] = hitPosition;
+            lr.SetPositions(points); 
+        }
         else if (Input.GetKeyDown(KeyCode.L))
         {
             Debug.DrawLine(transform.position, transform.position + ( tongueDirection * reach ) );
@@ -53,7 +61,9 @@ public class TongueShotAbility : MonoBehaviour
         hooking = true;
         rb2d.velocity = destination * pullPower;
         ogPosition = transform.position;
+        hitPosition = objHit.point;
         distanceToTravel = objHit.distance-shortenDistance;
+        lr.enabled = true;
     }
 
     void CheckPosition(){
@@ -61,6 +71,7 @@ public class TongueShotAbility : MonoBehaviour
         {
             rb2d.velocity = new Vector2(0f,0f);
             hooking = false;
+            lr.enabled = false;
         }
     }
 
