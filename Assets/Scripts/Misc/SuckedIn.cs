@@ -22,7 +22,6 @@ public class SuckedIn : MonoBehaviour
         if ((transform.position - player.transform.position).magnitude < 0.1) 
         {
             player.GetComponent<PlayerHurtbox>().health += healAmount;
-
             GetComponent<ParticleSystem>().Play(false); //STOPS EMITTING THE EXTRA BLODD
             Destroy(gameObject,0.5f);//DESTROYS AFTER A DELAY SO THE PARTICLES DOES NOT DISAPPEAR IMMEDIATELY
         }
