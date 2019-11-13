@@ -146,6 +146,9 @@ MonoBehaviour:
   speed: 0
   pushBack: 0
   target: {fileID: 0}
+  dying: 0
+  healPrefab: {fileID: 4455471157757689691, guid: f84d79dfc1c0b57488ef6351f883eb53,
+    type: 3}
   MaxSpeed: 0.6
   amp: 0.1
   accel: 0.03

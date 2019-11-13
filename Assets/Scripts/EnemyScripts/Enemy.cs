@@ -15,11 +15,13 @@ abstract public class Enemy : MonoBehaviour
     protected bool stunned;
     protected int stunCount = 25;
     public bool dying = false;
+    public GameObject healPrefab;
     
     protected abstract void movement();
 
     void Start()
     {
+        healPrefab = GameObject.Find("Health Globe");
         rb2d = GetComponent<Rigidbody2D>();
     }
 
@@ -37,5 +39,9 @@ abstract public class Enemy : MonoBehaviour
         return currentHealth-=power;
     }
 
-
+    protected void spawnHeal()
+    {
+        GameObject healthGlobe = Instantiate(healPrefab, transform.position, Quaternion.identity); //SPAWNS THE HEALTH GLOBE
+        healthGlobe.GetComponent<SuckedIn>().player = target;
+    }
 }

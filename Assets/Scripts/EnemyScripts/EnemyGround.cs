@@ -51,7 +51,7 @@ public class EnemyGround : Enemy
             }
             else                //########################## DYING
             {
-
+                spawnHeal();
                 Random.InitState(System.DateTime.Now.Second);  //######    Random Seed with current time in seconds
                 animator.SetTrigger(Random.Range(0, 1.0f) >= 0.5f ? "death" : "death2");   // 50 50 chance to play either animation
                 Destroy(gameObject, 1.5f);

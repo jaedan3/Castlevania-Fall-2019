@@ -3,7 +3,10 @@ guid: a08fb98d131af9148b59b9d94c2b98f6
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - target: {instanceID: 0}
+  - healPrefab: {fileID: 4455471157757689691, guid: f84d79dfc1c0b57488ef6351f883eb53,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

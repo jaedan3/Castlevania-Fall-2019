@@ -69,7 +69,7 @@ public class EnemyAir : Enemy
             }
             else                //########################## DYING
             {
-
+                spawnHeal();
                 Random.InitState(System.DateTime.Now.Second);
                 animator.SetTrigger("death");
                 stunCount = 1000;
