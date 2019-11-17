@@ -39,6 +39,7 @@ public class TongueShotAbility : MonoBehaviour
             points[0] = transform.position;
             points[1] = hitPosition;
             lr.SetPositions(points); 
+            lr.SetColors(Color.white, Color.red);
         }
         else if (Input.GetKeyDown(KeyCode.L))
         {
@@ -47,9 +48,10 @@ public class TongueShotAbility : MonoBehaviour
             if ( objHit.collider != null )
             {
                 Debug.Log("Hit");
-                if (objHit.collider.tag == "Wall" && !hooking) // collider is not the collider component, it is the object that was collided with
+                if (objHit.collider.tag == "Wall" && !hooking && objHit.distance > 1.1f) // collider is not the collider component, it is the object that was collided with
                 {
                     Debug.Log("Hooked");
+                    Debug.Log("Object Distance: " + objHit.distance);
                     pullTo(tongueDirection);
                 }
             }

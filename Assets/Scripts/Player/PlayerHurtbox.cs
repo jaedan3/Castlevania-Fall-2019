@@ -3,7 +3,7 @@
 [RequireComponent(typeof(CharacterController2D))]
 public class PlayerHurtbox : MonoBehaviour
 {
-    public int maxHealth = 6;
+    public int maxHealth = 10;
     public float invincibilityPeriod = 1;
     public float knockbackPeriod = 0.5f;
     public GameObject spririt; // SIN ADDED THIS 
