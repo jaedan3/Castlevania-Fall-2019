@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
         // But do keep it clean enough.
         if (controller.grounded)
         {
-            controller.velocity.x = Input.GetAxisRaw("Horizontal") * 5;
+            controller.velocity.x = Input.GetAxisRaw("Horizontal") * 8;
             if (Input.GetButton("Jump")) {
                 if (Input.GetAxisRaw("Vertical") < 0)
                 {
@@ -47,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
             // couplingggggg ugghhhh
             if (airControl)
             {
-                controller.velocity.x = Mathf.MoveTowards(controller.velocity.x, Input.GetAxis("Horizontal") * 5, 1f);
+                controller.velocity.x = Input.GetAxisRaw("Horizontal") * 5; //Mathf.MoveTowards(controller.velocity.x, Input.GetAxis("Horizontal") * 10, 1f);
             }
         }
         controller.Move(Time.fixedDeltaTime);
