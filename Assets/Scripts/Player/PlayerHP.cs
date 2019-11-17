@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerHP : MonoBehaviour
 {
     public Image[] HP_TICKS;
-    public int health;
+    public int health = 10;
     private int maxHP = 10;
      
 

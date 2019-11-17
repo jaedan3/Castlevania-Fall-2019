@@ -6,8 +6,8 @@ public class SuckedIn : MonoBehaviour
 {
     public GameObject player;
     public float speed;
-    public int healAmount;
     private bool expired = false;
+    private PlayerHP HP;
     // Start is called before the first frame update
 
     private void Awake()
@@ -22,10 +22,12 @@ public class SuckedIn : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed);
         if ((transform.position - player.transform.position).magnitude < 0.1) 
         {
+
+            HP = player.GetComponent<PlayerHP>();
             GetComponent<ParticleSystem>().Play(false); //STOPS EMITTING THE EXTRA BLODD
             if (!expired)
             {
-                player.GetComponent<PlayerHurtbox>().health += healAmount;
+                HP.health += HP.health == 10 ? 0: 1 ;
                 expired = true;
             }
             Destroy(gameObject,0.5f);//DESTROYS AFTER A DELAY SO THE PARTICLES DOES NOT DISAPPEAR IMMEDIATELY

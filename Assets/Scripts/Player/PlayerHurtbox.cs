@@ -12,7 +12,7 @@ public class PlayerHurtbox : MonoBehaviour
     SpriteRenderer spriteRenderer;
     PlayerMovement playerMovement;
 
-    public int health;
+    public PlayerHP health;
     // named different to prevent confusion.
     public float knockbackTimer = 0;
     public float invincibilityTimer = 0;
@@ -20,10 +20,10 @@ public class PlayerHurtbox : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        health = maxHealth;
         controller = GetComponent<CharacterController2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerMovement = GetComponent<PlayerMovement>();
+        health = GetComponent<PlayerHP>();
     }
 
     // Update is called once per frame
@@ -63,8 +63,9 @@ public class PlayerHurtbox : MonoBehaviour
         if (invincibilityTimer <= 0)
         {
             invincibilityTimer = invincibilityPeriod;
-            if(health > 0)
-            health--;///////////////////////////SIN ADDED THIS FOR HEALTH DISPLAY
+
+            health.health--;
+            if (health.health > 0) { }///////////////////////////SIN ADDED THIS FOR HEALTH DISPLAY
             else
             {
                 Instantiate(spririt, transform.position, Quaternion.identity);
