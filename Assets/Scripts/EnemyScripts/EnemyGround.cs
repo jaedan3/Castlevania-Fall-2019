@@ -46,10 +46,10 @@ public class EnemyGround : Enemy
         if (col.gameObject.tag == "Attack" && !dying) // When collided with an attack
         {
 
+            hit.Play();
             damage(20);
             if (currentHealth > 0 && !dying) // if HP is greator than 0, call KB(knockback)
             {
-                hit.Play();
                 KB(col.gameObject.GetComponent<SpriteRenderer>().flipX ? -1 : 1);
                 knocked = true;
                 animator.SetBool("Air", true);
