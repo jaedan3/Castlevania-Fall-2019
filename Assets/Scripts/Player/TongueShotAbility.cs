@@ -32,6 +32,13 @@ public class TongueShotAbility : MonoBehaviour
     void Update()
     {
         tongueDirection = ( new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) ).normalized;
+        if (tongueDirection == new Vector3(0, 0, 0))
+        {
+            if ( GetComponent<SpriteRenderer>().flipX )
+                tongueDirection = new Vector3(-1, 0, 0);
+            else
+                tongueDirection = new Vector3(1, 0, 0);
+        }
         RaycastHit2D HitWall = Physics2D.Raycast(transform.position, tongueDirection,1 );
         if (hooking)
         {

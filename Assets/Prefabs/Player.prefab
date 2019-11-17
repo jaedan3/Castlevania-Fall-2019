@@ -464,6 +464,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38855645d20616d8f842809e126a5345, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reach: 5
+  reach: 7
   pullPower: 20
   shortenDistance: 1
