@@ -11,6 +11,7 @@ public class EnemyGround : Enemy
     // private Transform wallDetect;
     public float xComp;
     bool knocked = false;
+    AudioSource hit;
     void Start()
     {
         xComp = walkSpeed;
@@ -20,6 +21,7 @@ public class EnemyGround : Enemy
         rb2d.freezeRotation = true;
         animator = GetComponent<Animator>();
         render = GetComponent<SpriteRenderer>();
+        hit = GetComponent<AudioSource>();
         ///////////////////////////////
 
 
@@ -44,6 +46,7 @@ public class EnemyGround : Enemy
         if (col.gameObject.tag == "Attack" && !dying) // When collided with an attack
         {
 
+            hit.Play();
             damage(20);
             if (currentHealth > 0 && !dying) // if HP is greator than 0, call KB(knockback)
             {
