@@ -16,7 +16,7 @@ public class EnemyGround : Enemy
     {
         xComp = walkSpeed;
         /////////////////////////////// GET COMPONENTS!
-        currentHealth = 100;
+        currentHealth = 50;
         rb2d = GetComponent<Rigidbody2D>();
         rb2d.freezeRotation = true;
         animator = GetComponent<Animator>();
