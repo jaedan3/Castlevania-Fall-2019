@@ -18,7 +18,7 @@ public class EnemyAir : Enemy
     void Start()
     {
         Position = transform.position;
-        currentHealth = 50;
+        currentHealth = 20;
         animator = GetComponent<Animator>();
     }
 
