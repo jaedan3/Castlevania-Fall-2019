@@ -55,12 +55,14 @@ public class CursorTitleScreen : MonoBehaviour
                 {
                     showUI(GameObject.Find("CreditsPanel").transform);
                     current = Selection.INCREDITS;
+                    moveTo(current);
                     break;
                 }
             case Selection.INCREDITS:
                 {
                     hideUI(GameObject.Find("CreditsPanel").transform);
                     current = Selection.CREDITS;
+                    moveTo(current);
                     break;
                 }
         }
